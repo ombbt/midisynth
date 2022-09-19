@@ -13,21 +13,12 @@ config(
         ('mididings output','128:0')	],
 )
 
-#hook(
-#	AutoRestart(),
-#)
-pre = Print('input', portnames='in') >> ~Filter(PROGRAM)
-post = Print('output', portnames='out') 
-#    fs = fluidsynth.Synth(),
-#    fs.start('alsa'),
-#    sfid = fs.sfload("/usr/share/sounds/sf2/FluidR3_GM.sf2"),
-
-
+pre = Filter(CTRL) % Print('input', portnames='in') >> ~Filter(PROGRAM)
+# post = Print('output', portnames='out') 
 
 control = Filter(PROGRAM) >> SceneSwitch()      
   #crée le programe control Filter(PROGRAM) et SceneSwitch() sont des fonction existantes, voir doc mididings
-	#	pre = Print('input', portname='in') >> ~Filter(PROGRAM)
-#pre = Print()
+
 
 #definie les sounds/output
 spam1 = Output('mididings output', 1)  #channel 1 on port 'FLUID synth
@@ -39,17 +30,10 @@ launchkeydaw3 = Output('Launchkey MK3 49 LKMK3 DAW IN', 3)
 
 
 #encore des lignes de codes incompréhensibles
-#aparrement un dummy serait un patch???? pas sur
-setup_lights = [
-#	launchkeydaw16,
-#		NoteOn(12, 0) >> launchkeydaw16,   #  Channel(16),
-#	launchkeydaw2,
-#		NoteOn(98, 45) >> launchkeydaw2,
 
-
-#	KeySplit('C3', spam1 ,spam2) >> Channel(1) ,Channel(2),
+dummy_1 = [  #par la suite, les colors du launchkey doivent etre dans le setup
 		NoteOn(12, 127) >> launchkeydaw16, # fout la merde car il envoie sur le port launchkey mais ne reconecte pas le port fluidsynth
-#		NoteOn(97, 24) >> launchkeydaw2,
+		NoteOn(97, 24) >> launchkeydaw2,	
 		NoteOn(98, 45) >> launchkeydaw3,
 		NoteOn(99, 121) >> launchkeydaw3,
 		NoteOn(100, 100) >> launchkeydaw3,
@@ -61,30 +45,14 @@ setup_lights = [
 		KeySplit('C3', spam1 ,spam2) 
 ]
 
-#def colors(y):
-#	launchkeydaw16
-#	NoteOn(12, 127) >> Channel(16),
-#	NoteOn(96, 9) >> Channel(1),
-#	NoteOn(97, 12) >> Channel(2),
-
-
-
 
 dummy_2 = KeySplit('C2', spam2 ,spam1)
 
 
-def preset1():
-	Call(setup_lights)
-
-
-
-
-
-
-#scene et program numbers 
 
 scenes = {
-	1: Scene("Dummy Scene1", dummy_2, init_patch=setup_lights),
+	1: Scene("Dummy Scene1", dummy_1),
+	
 	2: Scene("Dummy Scene2", dummy_2),
 }
 
@@ -94,5 +62,5 @@ run(
         control = control,
 	scenes = scenes,
 	pre=pre,
-	post=post,
+#	post=post,
 )
