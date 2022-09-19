@@ -395,6 +395,7 @@ sudo python setup.py
 
 
 pip install toggle  (install d'un switch onoff)
+pip install pyyaml
 
 
 
