@@ -1,0 +1,350 @@
+    1  sudo nano /boot/config.txt
+    2  reboot
+    3  sudo reboot
+    4  systemctl
+    5  ls
+    6  fluidsynth -is -a alsa -m alsa_seq -r 48000 '/usr/share/sounds/sf2/Fluid_GM.sf2'
+    7  ls /usr/share/sounds/sf2/
+    8  fluidsynth -is -a alsa -m alsa_seq -r 48000 '/usr/share/sounds/sf2/FluidR3_GM.sf2'
+    9  ls
+   10  pwd
+   11  ls
+   12  cd /
+   13  ls
+   14  cd /usr/lib/systemd/
+   15  ls
+   16  cd system
+   17  ls
+   18  cd /etc/systemd/system/
+   19  ls
+   20  sudo nano fluidsynth.service
+   21  ls -ll
+   22  sudo chmod 777 fluidsynth.service 
+   23  ls -ll
+   24  sudo systemctl start fluidsynth.service 
+   25  sudo systemctl status fluidsynth.service 
+   26  sudo systemctl enable fluidsynth.service 
+   27  printenv HOME
+   28  sudo nano /etc/environment
+   29  printenv SELECTED_SOUND_FONT
+   30  reboot
+   31  ls
+   32  cd midisynth
+   33  cd examples
+   34  ls
+   35  python scenepadcustom.py 
+   36  source /home/pi/pythonVenv10/bin/activate
+   37  python scenepadcustom.py 
+   38  cd ../
+   39  ls
+   40  cd ../
+   41  ls
+   42  cd ../
+   43  ls
+   44  cd ect
+   45  ls
+   46  cd etc
+   47  ls
+   48  cd conf.d
+   49  cd conf
+   50  cd /home/pi
+   51  ls
+   52  mididings
+   53  ls
+   54  cd ../
+   55  ls
+   56  cd pi
+   57  ls
+   58  cd midisynth/
+   59  ls
+   60  cd examples/
+   61  ls
+   62  python scenepadcustom.py 
+   63  speaket-test
+   64  speaker-test
+   65  sudo apt-get install -y build-essential tk-dev libncurses5-dev libncursesw5-dev libreadline6-dev libdb5.3-dev libgdbm-dev libsqlite3-dev libssl-dev libbz2-dev liblzma-dev zlib1g-dev libffi-dev
+   66  sudo wget https://www.python.org/ftp/python/3.10.4/Python-3.10.4.tar.xz
+   67  sudo tar -xvf Python-3.10.4.tar.xz
+   68  sudo ./configure --enable-optimizations
+   69  ls
+   70  Python-3.10.4/sudo ./configure --enable-optimizations
+   71  cd Python-3.10.4/
+   72  sudo ./configure --enable-optimizations
+   73  sudo make -j 4
+   74  sudo make altinstall
+   75  cd ../
+   76  wget https://boostorg.jfrog.io/artifactory/main/release/1.79.0/source/boost_1_79_0.tar.gz
+   77  tar -xvf boost_1_79_0.tar.gz
+   78  cd boost_1_79_0/
+   79  ./bootstrap.sh --prefix=/usr --with-python=python3.10 --with-libraries=python --with-libraries=thread
+   80  ./b2 stage -j4 threading=multi link=shared
+   81  sudo ./b2 install threading=multi link=shared
+   82  cd /lib
+   83  sudo ln -sf /lib/libboost_python310.so libboost_python.so
+   84  sudo apt-get update
+   85  sudo apt-get install python3-venv
+   86  sudo apt-get install liblo-dev
+   87  sudo apt-get install libglib2.0-dev
+   88  sudo apt update
+   89  sudo apt install libasound2-dev
+   90  sudo apt install libjack-jackd2-dev
+   91  python3.10 -m venv /home/pi/pythonVenv10
+   92  source /home/pi/pythonVenv10/bin/activate 
+   93  pip install --upgrade pip
+   94  pip install decorator
+   95  Installing collected packages: pip
+   96  pip install decorator
+   97  pip install pyinotify
+   98  pip install cython
+   99  pip install wheel
+  100  pip install pyliblo
+  101  cd /home/pi
+  102  sudo apt-get install git
+  103  sudo git clone https://github.com/stefets/mididings.git
+  104  cd mididings/
+  105  sudo git checkout build-2021-python3
+  106  git status
+  107  sudo apt-get install libglib2.0-dev
+  108  sudo /home/pi/pythonVenv10/bin/python3.10 setup.py build
+  109  sudo /home/pi/pythonVenv10/bin/python3.10 setup.py install
+  110  sudo apt-get install fluidsynth
+  111  cd ../
+  112  git clone https://github.com/ombbt/midisynth
+  113  ls
+  114  cd midisynth
+  115  ls
+  116  cd examples
+  117  ls
+  118  nano runpiano.sh
+  119  ./runpiano.sh
+  120  [B
+  121  ./runpiano.sh
+  122  nano runpiano.sh
+  123  ./runpiano.sh
+  124  sudo apt-get fluidsynth
+  125  sudo apt-get install fluidsynth
+  126  ./runpiano.sh
+  127  cd /etc/systemd/system/
+  128  ls
+  129  nano fluidsynth.service 
+  130  sudo systemctl status fluidsynth.service 
+  131  ls
+  132  cd midisynth/
+  133  cd examples/
+  134  ls
+  135  cd /etc/systemd/system/
+  136  ls
+  137  cat fluidsynth.service midisynth 
+  138  cp fluidsynth.service midisynth.service
+  139  sudo cp fluidsynth.service midisynth.service
+  140  sudo nano midisynth.service
+  141  /home/pi/pythonVenv10/bin/python --version
+  142  sudo nano midisynth.service
+  143  ls
+  144  ls /home/pi/midisynth/examples/
+  145  sudo nano midisynth.service
+  146  sudo systemctl start midisynth.service 
+  147  sudo systemctl status midisynth.service 
+  148  sudo nano midisynth.service
+  149  sudo systemctl start midisynth.service 
+  150  sudo systemctl daemon-reload
+  151  sudo systemctl start midisynth.service 
+  152  sudo systemctl status midisynth.service 
+  153  sudo systemctl enable midisynth.service 
+  154  sudo systemctl stop midisynth.service 
+  155  sudo systemctl start midisynth.service 
+  156  sudo systemctl stop midisynth.service 
+  157  sudo systemctl start midisynth.service 
+  158  sudo systemctl stop midisynth.service 
+  159  sudo systemctl start midisynth.service 
+  160  reboot
+  161  sudo systemctl status midisynth.service 
+  162  sudo systemctl
+  163  sudo systemctl status fluidsynth.service 
+  164  aconnect -l
+  165  sudo nano midisynth.service 
+  166  sudo nano /etc/systemd/system/midisynth.service 
+  167  reboot
+  168  aconnect -l
+  169  sudo nano /etc/systemd/system/fluidsynth.service 
+  170  ls
+  171  sudo nano /etc/systemd/system/fluidsynth.service 
+  172  ls
+  173  cd midisynth/
+  174  ls
+  175  cd examples/
+  176  ls
+  177  nano scenepadcustom.py 
+  178  aconnect -l
+  179  nano scenepadcustom.py 
+  180  reboot
+  181  sudo systemctl status fluidsynth.service
+  182  systemctl status fluidsynth.service
+  183  sudo systemctl stop fluidsynth.service
+  184  sudo systemctl stop midisynth.service
+  185  aconnect -l
+  186  sudo systemctl start fluidsynth.service
+  187  sudo systemctl start midisynth.service
+  188  aconnect -l
+  189  sudo systemctl stop midisynth.service
+  190  cd midisynth/examples/
+  191  ls
+  192  nano scenepadcustom.py 
+  193  ls
+  194  sudo systemctl start midisynth.service
+  195  aconnect -l
+  196  free
+  197  free -h
+  198  man free
+  199  man free -s 1 -h
+  200  man free -s 
+  201  free -s 1 -h
+  202  man ps
+  203  top 
+  204  sudo nano /etc/systemd/system/fluidsynth.service 
+  205  sudo nano /etc/systemd/system/midisynth.service 
+  206  sudo nano /etc/systemd/system/fluidsynth.service 
+  207  fluidsynth -h
+  208  fluidsynth -p 4350
+  209  fluidsynth -p 230 -a alsa
+  210  fluidsynth  -a alsa 
+  211  cat /etc/systemd/system/fluidsynth.service 
+  212  fluidsynth -is -a alsa -m alsa_seq -r 48000 -p 150 
+  213  fluidsynth -is -a alsa -m alsa_seq -r 48000 -p 150:0 
+  214  fluidsynth -is -a alsa -m alsa_seq -r 48000 
+  215  sudo systemctl stop fluidsynth.service 
+  216  fluidsynth -is -a alsa -m alsa_seq -r 48000 /usr/share/sounds/sf2/FluidR3_GM.sf2 
+  217  fluidsynth -is -p 150:0 -a alsa -m alsa_seq -r 48000 /usr/share/sounds/sf2/FluidR3_GM.sf2 
+  218  fluidsynth -is -p 150 -a alsa -m alsa_seq -r 48000 /usr/share/sounds/sf2/FluidR3_GM.sf2 
+  219  fluidsynth -is -a alsa -m alsa_seq -r 48000 /usr/share/sounds/sf2/FluidR3_GM.sf2 
+  220  fluidsynth -h
+  221  fluidsynth -
+  222  man fluidsynth
+  223  man fluidsynth | grep client
+  224  man fluidsynth | grep 
+  225  man fluidsynth | grep client
+  226  man fluidsynth
+  227  fluidsynth -is -o midi.alsa_seq.id=150 -a alsa -m alsa_seq -r 48000 /usr/share/sounds/sf2/FluidR3_GM.sf2 
+  228  fluidsynth -is -o midi.coremidi.id=150 -a alsa -m alsa_seq -r 48000 /usr/share/sounds/sf2/FluidR3_GM.sf2 
+  229  fluidsynth -is -o midi.coremidi. -a alsa -m alsa_seq -r 48000 /usr/share/sounds/sf2/FluidR3_GM.sf2 
+  230  fluidsynth -is -o midi.coremidi.id=150:0 -a alsa -m alsa_seq -r 48000 /usr/share/sounds/sf2/FluidR3_GM.sf2 
+  231  fluidsynth -is -o midi.coremidi.id -a alsa -m alsa_seq -r 48000 /usr/share/sounds/sf2/FluidR3_GM.sf2 
+  232  fluidsynth -o 
+  233  fluidsynth -o -l
+  234  fluidsynth -h
+  235  man fluidsynth
+  236  fluidsynth -o help
+  237  fluidsynth -o help | grep coremidi
+  238  fluidsynth -o help | grep midi
+  239  fluidsynth -o help | grep client
+  240  fluidsynth -is -o midi.alsa_seq.device=150 -a alsa -m alsa_seq -r 48000 /usr/share/sounds/sf2/FluidR3_GM.sf2 
+  241  fluidsynth -v
+  242  fluidsynth --version
+  243  fluidsynth -o help | grep midi
+  244  ls
+  245  pwd fluidsynth
+  246  path fluidsynth
+  247  ls
+  248  cd ../../
+  249  ls
+  250  pwd
+  251  ls
+  252  qhich fluidsynth
+  253  which fluidsynth
+  254  ls /usr/bin/
+  255  ls /usr/bin/ -alh | grep fluid
+  256  ls
+  257  tree
+  258  sudo apt-get install tree
+  259  aconnect -l
+  260  nano ~/midisynth/examples/scenepadcustom.py 
+  261  mididings
+  262  ls
+  263  cd mididings/
+  264  ls
+  265  mididings
+  266  ./mididings
+  267  cd dist/
+  268  ls
+  269  cd ../
+  270  cd build/
+  271  ls
+  272  cd ../
+  273  l
+  274  ls
+  275  cd mididings
+  276  ls
+  277  cd ../
+  278  ls
+  279  cd src
+  280  ls
+  281  cd ../
+  282  ls
+  283  cd doc/
+  284  ls
+  285  cat conf.py 
+  286  cat conf.py  | less
+  287  ls
+  288  cd examples/
+  289  ls
+  290  cat router.py 
+  291  ls
+  292  cat output.py 
+  293  cat skeleton.py 
+  294  cat skeleton.py  | less
+  295  sudo nano /etc/systemd/system/midisynth.service 
+  296  reboot
+  297  aconnect -l
+  298  sudo nano /etc/systemd/system/midisynth.service 
+  299  reboot
+  300  aconnect -l
+  301  sudo nano /etc/systemd/system/midisynth.service 
+  302  reboot
+  303  ls
+  304  sudo nano /etc/systemd/system/midisynth.service 
+  305  pwd
+  306  cd pythonVenv10/bin/
+  307  ls
+  308  python --version
+  309  cd /home/pi
+  310  python --version
+  311  /home/pi/pythonVenv10/bin/python -v
+  312  /home/pi/pythonVenv10/bin/python --version
+  313  python --version
+  314  /home/pi/pythonVenv10/bin/python --version
+  315  which python
+  316  sudo nano /etc/systemd/system/midisynth.service 
+  317  ls
+  318  cd midisynth/
+  319  ls
+  320  mkdir daemons
+  321  cd daemons/
+  322  ln -h
+  323  ln -help
+  324  ln --help
+  325  ln -P /etc/systemd/system/midisynth.service .
+  326  sudo ln -P /etc/systemd/system/midisynth.service .
+  327  ls
+  328  cat midisynth.service 
+  329  ls /etc/systemd/system/midisynth.service
+  330  ls /etc/systemd/system/
+  331  ls -alh /etc/systemd/system/
+  332  ls -alh
+  333  nano midisynth.service 
+  334  sudo nano midisynth.service 
+  335  cat midisynth.service 
+  336  ls
+  337  cat /etc/systemd/system/midisynth.service
+  338  ls
+  339  pwd
+  340  git status
+  341  cat /etc/systemd/system/midisynth.service
+  342  nano midisynth.service 
+  343  sudo nano midisynth.service 
+  344  cat midisynth.service 
+  345  cat /etc/systemd/system/midisynth.service
+  346  sudo ln -P /etc/systemd/system/fluidsynth.service .
+  347  ls
+  348  cd ..
+  349  ls
+  350  history >> install_with_daemons.txt
