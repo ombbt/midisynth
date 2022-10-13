@@ -1,0 +1,16 @@
+tuto
+
+https://bbs.archlinux.org/viewtopic.php?id=173709
+
+
+le foichier .asoundrc est un fichier caché dans /home/pi pour connaitre le numero des cartes utiliser aplay -l
+
+pcm.!default {
+        type hw
+        card 2
+}
+
+ctl.!default {
+        type hw           
+        card 0
+}
