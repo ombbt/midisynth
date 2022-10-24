@@ -1,0 +1,3 @@
+dans le fichier runpiano.sh ou dans le fichier fluidsynth.service (daemon)
+rajouter -o synth.midi-bank-select=xg avant le -a alsa.....
+ici pour modifier le systeme de selection des programes et des banks
