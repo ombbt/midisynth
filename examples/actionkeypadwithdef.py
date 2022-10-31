@@ -34,7 +34,8 @@ print("bonjour")
 
 #secs = 0
 pressed = set()
-while True:
+def readkeypad():
+	global timmer
 	syn = False
 	for i in range(len(rows)):
 		GPIO.setup(rows[i], GPIO.OUT, initial = GPIO.LOW)
@@ -96,3 +97,6 @@ while True:
 					print('explosed')
 		GPIO.setup(rows[i], GPIO.IN)
 		
+
+while True:
+	readkeypad()

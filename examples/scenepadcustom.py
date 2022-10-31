@@ -11,9 +11,11 @@ from mididings.extra import *
 config(
 	backend='alsa',
 	client_name='mididings',
-	in_ports = [('Launchkey MK3 49 LKMK3 MIDI IN', '20:0')],
+	in_ports = [
+		('Arduino Leonardo MIDI 1', '20:0'),
+		('Launchkey MK3 49 LKMK3 MIDI IN', '16:0')],
 	out_ports = [
-	('Launchkey MK3 49 LKMK3 DAW IN','20:1'),
+	('Launchkey MK3 49 LKMK3 DAW IN','16:1'),
         ('mididings output','128:0')	],
 )
 
@@ -40,7 +42,7 @@ launchkeydaw12 = Output('Launchkey MK3 49 LKMK3 DAW IN', 12)
 
 notespads1 = [
 	CtrlFilter(38) >> NoteOn(54, 60) >> spam3,
-	CtrlFilter(39) >> Panic(bypass=True),
+	CtrlFilter(51) >> Panic(bypass=True),
 #	Channel(1) >> CtrlFilter(38) >> NoteOff(54, 60) >> spam3,
 ]
 

@@ -2,14 +2,14 @@
 #! /usr/bin/python
 import RPi.GPIO as GPIO
 #from machine import Pin
-from pad4pi import rpi_gpio
+#from pad4pi import rpi_gpio
 import time
 #from evdev import UInput, ecodes as e
 
 
 
 cols = [26, 10, 9, 11]
-rows = [25, 24, 23, 20]
+rows = [25, 24, 23, 18]
 # rows = [18, 23, 24, 25]
 
 keymap = [
@@ -49,7 +49,6 @@ while True:
 				print(keypressed, keycode)
 				if keycode == 0:
 					print('action 1')
-					timmer = time.process_time()
 				elif keycode == 1:
 					print('action 4')
 				elif keycode == 2:
@@ -90,7 +89,7 @@ while True:
 				syn = True
 				print("raellllaesed") #, keypressed, keycode)
 				timmer2 = time.process_time() -4 
-				if keycode == 0 and timmer2 > timmer:
+				if keycode == 15 and timmer2 > timmer:
 					print('action on release with timmer', timmer2)
 					print('autodesctruction')
 					print('explosed')
