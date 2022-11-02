@@ -3,7 +3,7 @@ Description=FluidSynth Daemon
 After=sound.target
 
 [Service]
-ExecStart=/usr/bin/fluidsynth -is -o synth.midi-bank-select=xg -a alsa -m alsa_seq -r 48000 '/usr/share/sounds/sf2/FluidR3_GM.sf2'
+ExecStart=/usr/bin/fluidsynth -is -o synth.midi-bank-select=xg -a alsa -g 1 -m alsa_seq -r 48000 '/home/pi/midisynth/FluidR3_GModif.sf2'
 
 [Install]
 WantedBy=multi-user.target

@@ -4,6 +4,7 @@ https://bbs.archlinux.org/viewtopic.php?id=173709
 
 
 le foichier .asoundrc est un fichier caché dans /home/pi pour connaitre le numero des cartes utiliser aplay -l
+il faut aussi copier le fichier dans /root/.asoundrc  car le daemon fonctionne en temp que root
 
 pcm.!default {
         type hw

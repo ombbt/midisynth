@@ -4,7 +4,7 @@ After=sound.target
 
 [Service]
 ExecStartPre=/bin/sleep 10
-ExecStart=/home/pi/pythonVenv10/bin/python /home/pi/midisynth/examples/scenepadcustom.py
+ExecStart=/home/pi/pythonVenv10/bin/python /home/pi/midisynth/examples/Octobre2.py
 
 [Install]
 WantedBy=multi-user.target
