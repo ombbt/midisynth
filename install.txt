@@ -137,3 +137,24 @@ sudo systemctl enable fluidsynth.service
 reboot
 
 systemctl status fluidsynth.service (display error message of fluidsynth)
+
+
+###########################################
+#		send sf2file.sf2 via scp 	#					#
+###########################################
+
+1 sur le rasperypi
+raspi-config #-enable ssh
+ssh localhost
+
+puis sur le terminal windows
+
+ssh pi@raspberrypi.local
+si le message d'ereur
+WARNING: POSSIBLE DNS SPOOFING DETECTED! 
+The ECDSA host key for raspberrypi.local has changed,
+
+suprimer le fichier C/users/alex/.ssh/known_host
+
+depuis un autre terminal
+scp FluidR3_GModif2 pi@raspberrypi.local:/home/pi
