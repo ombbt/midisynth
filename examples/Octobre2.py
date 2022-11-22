@@ -3,16 +3,16 @@ from mididings import *
 from mididings.event import *
 from mididings.extra import *
 from mididings.engine import *
-from dotenv import *
-from dotenv import load_dotenv
+#from dotenv import *
+#from dotenv import load_dotenv
 import os
 import RPi.GPIO as GPIO
 import time
 
-load = load_dotenv(dotenv_path='/home/pi/midisynth/examples/variables.env')
-#require('dotenv').config({override: true})
+#load = load_dotenv(dotenv_path='/home/pi/midisynth/examples/variables.env')
+#require('dotenv').config({override: true}h
 
-TRANSPOSE =int(os.getenv('TRANSPOSE'))
+#TRANSPOSE =int(os.getenv('TRANSPOSE'))
 
 #Keypad
 cols = [26, 10, 9, 11]
@@ -29,7 +29,7 @@ GPIO.setup(rows, GPIO.OUT)
 GPIO.setup(cols, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
 print("config GPIO OK")
-print(TRANSPOSE)
+#print(TRANSPOSE)
 
 pressed = set()
 timmer1 = 1.0
@@ -231,12 +231,12 @@ def readkeypad(self):
 config(
 	backend='alsa',
 	client_name='mididings',
-	in_ports = [	('Launchkey MK3 49 LKMK3 MIDI IN', '16:0'),
-			('Arduino Leonardo MIDI 1', '20:0')
+	in_ports = [	('Launchkey MK3 49 LKMK3 MIDI IN', '20:0'),
+			('Arduino Leonardo MIDI 1', '16:0')
 			
 		],
 	out_ports = [
-	('Launchkey MK3 49 LKMK3 DAW IN','16:1'),
+	('Launchkey MK3 49 LKMK3 DAW IN','20:1'),
         ('mididings output','128:0')	],
 )
 
