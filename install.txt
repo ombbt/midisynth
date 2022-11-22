@@ -18,6 +18,16 @@ ifconfig  (display ip adress, affiche l'adresse ip)
 
 4) connect raspberry to internet (share conection with my smartphone, partage de conection avec mon smartphone)
 
+5) give some power to pi
+(which pour trouver l'emplacement d'une fonction) ex:
+which apt-get
+
+
+sudo chmod 4755 /sbin/reboot
+sudo chmod 4755 /sbin/shutdown
+sudo chmod 4755 /usr/bin/apt-get (la ca marche pas je sais pas pourquoi)
+sudo chmod 4755 /usr/bin/apt-key
+sudo chmod 4755 /usr/bin/wget
 
 #####################################
 #		pyhton 3.10 install	#
@@ -48,6 +58,7 @@ pip install cython
 pip install wheel
 pip install pyliblo
 pip install RPi.GPIO
+pip install smbus
 
 #####################################
 #		mididings install		#
@@ -91,6 +102,14 @@ sudo /home/pi/pythonVenv10/bin/python3.10 setup.py build
 sudo /home/pi/pythonVenv10/bin/python3.10 setup.py install
 
 sudo apt-get install fluidsynth
+
+#####################################
+#		lcd I2c install		#
+#####################################
+piip install smbus (deja fait au dessu)
+sudo apt-get install i2c-tools
+sudo raspi-config => interface
+sudo nano /etc/modules
 
 ###########################################
 #	recuperation du github midisynth	#						#
