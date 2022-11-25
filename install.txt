@@ -25,9 +25,9 @@ which apt-get
 
 sudo chmod 4755 /sbin/reboot
 sudo chmod 4755 /sbin/shutdown
-sudo chmod 4755 /usr/bin/apt-get (la ca marche pas je sais pas pourquoi)
-sudo chmod 4755 /usr/bin/apt-key
-sudo chmod 4755 /usr/bin/wget
+( sudo chown -R pi:pi midisynth atribue un dossier et tout son contenu a pi)
+
+sudo chmod 777 /usr/bin/wget
 
 #####################################
 #		pyhton 3.10 install	#
