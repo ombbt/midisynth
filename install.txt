@@ -65,7 +65,7 @@ pip install smbus
 #####################################
 
 sudo apt-get install git
-sudo git clone https://github.com/stefets/mididings.git
+git clone https://github.com/stefets/mididings.git
 cd mididings/
 git status
 sudo git checkout build-2021-python3
@@ -97,26 +97,29 @@ sudo ./b2 install threading=multi link=shared
 cd /lib
 sudo ln -sf /lib/libboost_python310.so libboost_python.so
 
-cd /mididings
-sudo /home/pi/pythonVenv10/bin/python3.10 setup.py build
-sudo /home/pi/pythonVenv10/bin/python3.10 setup.py install
+cd mididings
+/home/pi/pythonVenv10/bin/python3.10 setup.py build
+/home/pi/pythonVenv10/bin/python3.10 setup.py install
 
 sudo apt-get install fluidsynth
 
 #####################################
 #		lcd I2c install		#
 #####################################
-piip install smbus (deja fait au dessu)
+pip install smbus (deja fait au dessu)
 sudo apt-get install i2c-tools
-sudo raspi-config => interface
-sudo nano /etc/modules
+sudo raspi-config => interface => enable i2c
+sudo nano /etc/modules =>
+	i2c-bcm2708
+	i2c-dev
+
 
 ###########################################
 #	recuperation du github midisynth	#						#
 ###########################################
 
 cd /home/pi
-sudo git clone https://github.com/ombbt/midisynth/
+git clone https://github.com/ombbt/midisynth/
 
 ###########################################
 #			carte son			#
@@ -149,7 +152,7 @@ modifier les connections dans le programme
 
 cd /etc/systemd/system
 sudo ln -P /home/pi/midisynth/daemons/midisynth.service ./midisynth.service
-sudo ln -P /home/pi/midisynth/daemons/midisynth.service ./midisynth.service
+sudo ln -P /home/pi/midisynth/daemons/fluidsynth.service ./fluidsynth.service
 
 sudo systemctl enable midisynth.service
 sudo systemctl enable fluidsynth.service
