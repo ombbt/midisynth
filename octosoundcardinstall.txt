@@ -1,0 +1,67 @@
+https://github.com/Audio-Injector/Octo/raw/master/audioinjector.octo.setup_0.4_all.deb
+
+1) 
+cd /home/pi
+mkdir octosound
+cd octosound
+sudo apt-get update
+wget https://github.com/Audio-Injector/Octo/raw/master/audioinjector.octo.setup_0.4_all.deb
+sudo dpkg -i audioinjector.octo.setup_0.4_all.deb
+
+sudo nano /boot/config.txt
+enlever le # devant dtparam=I2s=on
+dtoverlay=vc4-kms-v3d,noaudio (rajouter le , noaudio) cette ligne corespond a l'hdmi, on desactive donc l'audio de l'hdmi
+note: avant la désactivation de l'hdmi audio, lorqu'on fesai aplay -l l'hdmi était en carte 0 et la octochanel en carte 1,
+ce n'est qu'apré plusieurs reboot que la octochannel est repassée en carte 0
+note: les devices midi compte aussi commes des cartes et perturbent aussi la carte 0 
+
+un bug arrive de temp en temp apres le reboot, la carte n'est pas reconnue
+http://forum.audioinjector.net/viewtopic.php@f=9&t=5793.html lien avec la resolution du probleme
+
+add this text to /etc/modprobe.d/audioinjector-octo.conf :
+softdep snd_soc_audioinjector_octo_soundcard pre: shd_soc_cs42xx8 snd_soc_cs42xx8_i2c
+(ca a l'air de marcher)
+
+
+
+
+j'en profite pour lister ici tout ce qui est en raport avec ALSA (et je parle pas de sucre en poudre)
+
+aplay -l
+aplay -L
+aplay -help
+aplay --channels=1 (j'ai l'impression que ca selectionne la, ca display rien du tout)
+aplay file.wav
+
+arecord -l (inputs)
+aconnect -l (midi)
+
+speaker-test
+speaker-test c2 (stereo)
+speaker-test -c8 (envoie le test sur 8channels une par une.)
+speaker-test --channel {1}
+
+deamons:
+alsa-restore.service
+alsa-utils.service
+alsa-state.service
+
+fichiers:
+/boot/config.txt
+.asoudrc dans /home/pi/ et dans /root/
+/etc/asound.conf
+/etc/modules.conf (je sais pas trop a quoi ca sert mais c'est peut etre la solution a mon probleme)
+https://alsa.opensrc.org/Etc_modules_conf
+
+/proc/asound/cards /modules /devices (aller voir aussi)
+
+
+https://alsa.opensrc.org/MultipleCards (sujet Multiple cards)
+/etc/modprobe.d/alsa.conf
+
+
+
+
+
+
+
