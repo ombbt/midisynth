@@ -49,6 +49,12 @@ sudo apt-get install liblo-dev
 sudo apt-get install libglib2.0-dev
 sudo apt install libasound2-dev
 sudo apt install libjack-jackd2-dev
+sudo apt-get install fluidsynth
+sudo apt-get install i2c-tools
+sudo apt-get install git
+
+
+
 
 sudo apt-get install pip
 pip install update
@@ -61,49 +67,6 @@ pip install RPi.GPIO
 pip install smbus
 
 #####################################
-#		mididings install		#
-#####################################
-
-sudo apt-get install git
-git clone https://github.com/stefets/mididings.git
-cd mididings/
-git status
-sudo git checkout build-2021-python3
-
-python3.10 -m venv /home/pi/pythonVenv10     #create virtual environement of python 3.10
-source /home/pi/pythonVenv10/bin/activate
-
-python --version
-pip install decorator     #reinstall lib with Virtual environement active
-pip install pyinotify
-pip install cython
-pip install wheel
-pip install RPi.GPIO
-pip install pyliblo
-
-### ajout du repertoire pi/.local/bin au path pour permettre a linux de trouver certaines commandes (lié a python)
-PATH=/home/pi/.local/bin:$PATH
-
-git status (#on branch origin/build-2021-python3)
-
-cd /home/pi
-sudo wget https://boostorg.jfrog.io/artifactory/main/release/1.79.0/source/boost_1_79_0.tar.gz
-sudo tar -xvf boost_1_79_0.tar.gz
-cd boost_1_79_0/
-
-sudo ./bootstrap.sh --prefix=/usr --with-python=python3.10 --with-libraries=python --with-libraries=thread
-sudo ./b2 stage -j4 threading=multi link=shared
-sudo ./b2 install threading=multi link=shared
-cd /lib
-sudo ln -sf /lib/libboost_python310.so libboost_python.so
-
-cd mididings
-/home/pi/pythonVenv10/bin/python3.10 setup.py build
-/home/pi/pythonVenv10/bin/python3.10 setup.py install
-
-sudo apt-get install fluidsynth
-
-#####################################
 #		lcd I2c install		#
 #####################################
 pip install smbus (deja fait au dessu)
@@ -112,6 +75,50 @@ sudo raspi-config => interface => enable i2c
 sudo nano /etc/modules =>
 	i2c-bcm2708
 	i2c-dev
+
+#####################################
+#		mididings install		#
+#####################################
+cd /home/pi
+sudo wget https://boostorg.jfrog.io/artifactory/main/release/1.79.0/source/boost_1_79_0.tar.gz
+sudo tar -xvf boost_1_79_0.tar.gz
+cd boost_1_79_0/
+sudo ./bootstrap.sh --prefix=/usr --with-python=python3.10 --with-libraries=python --with-libraries=thread
+sudo ./b2 stage -j4 threading=multi link=shared
+sudo ./b2 install threading=multi link=shared
+cd /lib
+sudo ln -sf /lib/libboost_python310.so libboost_python.so
+
+cd /home/pi
+git clone https://github.com/stefets/mididings.git
+cd mididings/
+git status
+git checkout build-2021-python3
+
+python3.10 -m venv /home/pi/pythonVenv10     #create virtual environement of python 3.10
+source /home/pi/pythonVenv10/bin/activate
+/home/pi/pythonVenv10/bin/python3.10 -m pip install --upgrade pip
+
+python --version
+pip install decorator     #reinstall lib with Virtual environement active
+pip install pyinotify
+pip install cython
+pip install wheel
+pip install RPi.GPIO
+pip install pyliblo
+pip install RPi.GPIO
+pip install smbus
+
+### ajout du repertoire pi/.local/bin au path pour permettre a linux de trouver certaines commandes (lié a python)
+PATH=/home/pi/.local/bin:$PATH
+
+git status (#on branch origin/build-2021-python3)
+
+
+cd mididings
+/home/pi/pythonVenv10/bin/python3.10 setup.py build
+/home/pi/pythonVenv10/bin/python3.10 setup.py install
+
 
 
 ###########################################
@@ -130,6 +137,7 @@ puis editer les fichier /home/pi/.asoundrc et /root/.asoundrc
 
 speaker-test (mono)
 speaker-test -c2 (stereo)
+speaker test -c8 (8 channels)
 
 a ce stade on peut deja tester le runpiano
 et un example
@@ -144,7 +152,6 @@ aconnect -l
 
 modifier les connections dans le programme
 
-!!!!!!!!!! probleme: pour l'instant, mon fichier sf2 n'a pas chargé corectement.
 
 ###########################################
 #			daemons			#
