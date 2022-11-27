@@ -35,6 +35,9 @@ aplay file.wav
 
 arecord -l (inputs)
 aconnect -l (midi)
+amixer -help
+
+alsactl init (initialise la detections des cartes
 
 speaker-test
 speaker-test c2 (stereo)
@@ -58,6 +61,7 @@ https://alsa.opensrc.org/Etc_modules_conf
 
 https://alsa.opensrc.org/MultipleCards (sujet Multiple cards)
 /etc/modprobe.d/alsa.conf
+/var/lib/alsa/asound.state
 
 
 
