@@ -48,18 +48,20 @@ sudo nano /boot/config.txt
 ###add this text to /etc/modprobe.d/audioinjector-octo.conf :
 ###	softdep snd_soc_audioinjector_octo_soundcard pre: shd_soc_cs42xx8 snd_soc_cs42xx8_i2c
 
-cd /etc/modprobe.d/
-sudo nano audioinjector-octo.conf
+
+sudo nano /etc/modprobe.d/audioinjector-octo.conf
 	add this text and save:
 	softdep snd_soc_audioinjector_octo_soundcard pre: shd_soc_cs42xx8 snd_soc_cs42xx8_i2c
 
+reboot
 aplay -l
 sudo nano /etc/asound.conf
-sudi nano /home/pi/.asoundrc
+sudo nano /home/pi/.asoundrc
 modif folder /home/pi/.asoundrc   and  /etc/asound.conf changes all the card number and the hw number
 	card = [card number]
 	hw:[card number]
 
+reboot
 speaker-test -c8
 	
 
@@ -81,19 +83,19 @@ sudo make -j 4
 sudo make altinstall
 cd /home/pi
 
-sudo apt-get install python3-venv
-sudo apt-get install liblo-dev
-sudo apt-get install libglib2.0-dev
-sudo apt install libasound2-dev
-sudo apt install libjack-jackd2-dev
+sudo apt-get install python3-venv -y
+sudo apt-get install liblo-dev -y
+sudo apt-get install libglib2.0-dev -y
+sudo apt install libasound2-dev -y
+sudo apt install libjack-jackd2-dev -y
 (sudo apt-get install jack)
-sudo apt-get install fluidsynth
-sudo apt-get install i2c-tools
-sudo apt-get install jackd
+sudo apt-get install fluidsynth -y
+sudo apt-get install i2c-tools -y
+sudo apt-get install jackd -y
 
 
 
-sudo apt-get install pip
+sudo apt-get install pip -y
 pip install update
 pip install decorator
 pip install pyinotify
@@ -119,7 +121,7 @@ cd /lib
 sudo ln -sf /lib/libboost_python310.so libboost_python.so
 
 
-sudo apt-get install git
+sudo apt-get install git -y
 git clone https://github.com/stefets/mididings.git
 cd mididings/
 git status
@@ -156,7 +158,7 @@ cd mididings
 #####################################
 pip install smbus (deja fait au dessu)
 sudo raspi-config => interface => enable i2c
-sudo nano /etc/modules =>
+sudo nano /etc/modules 
 	i2c-bcm2708
 	i2c-dev
 
