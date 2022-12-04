@@ -1,0 +1,229 @@
+###################################################################
+#				INSTALL 04/12/2022				#
+###################################################################
+
+1) Flash de la carte SD OS RASPERRY PI OS LITE 32-BIT
+
+2) conect as root
+
+rapsi-config
+	-set password for pi (system option)
+	-Enable ssh , I2c(display option)
+
+su pi
+
+3) conect with putty 
+
+ifconfig  (display ip adress, affiche l'adresse ip)
+
+4) connect raspberry to internet (share conection with my smartphone, partage de conection avec mon smartphone)
+
+5) give some power to pi
+(which pour trouver l'emplacement d'une fonction) ex:
+which apt-get
+
+
+sudo chmod 4755 /sbin/reboot
+sudo chmod 4755 /sbin/shutdown
+( sudo chown -R pi:pi midisynth atribue un dossier et tout son contenu a pi)
+
+(pas besoin il me semble) sudo chmod 777 /usr/bin/wget
+
+#################################################
+#		audioinjectorocto install		#
+#################################################
+
+cd /home/pi
+mkdir octosound
+cd octosound
+sudo apt-get update
+wget https://github.com/Audio-Injector/Octo/raw/master/audioinjector.octo.setup_0.4_all.deb
+sudo dpkg -i audioinjector.octo.setup_0.4_all.deb
+
+sudo nano /boot/config.txt
+	enlever le # devant dtparam=I2s=on
+	ecrire noaudio
+	dtoverlay=vc4-kms-v3d,noaudio
+
+###add this text to /etc/modprobe.d/audioinjector-octo.conf :
+###	softdep snd_soc_audioinjector_octo_soundcard pre: shd_soc_cs42xx8 snd_soc_cs42xx8_i2c
+
+cd /etc/modprobe.d/
+sudo nano audioinjector-octo.conf
+	add this text and save:
+	softdep snd_soc_audioinjector_octo_soundcard pre: shd_soc_cs42xx8 snd_soc_cs42xx8_i2c
+
+aplay -l
+sudo nano /etc/asound.conf
+sudi nano /home/pi/.asoundrc
+modif folder /home/pi/.asoundrc   and  /etc/asound.conf changes all the card number and the hw number
+	card = [card number]
+	hw:[card number]
+
+speaker-test -c8
+	
+
+
+
+#####################################
+#		pyhton 3.10 install	#
+#####################################
+python --version (display pythonversion)
+
+cd /home/pi
+sudo apt-get update
+sudo apt-get install -y build-essential tk-dev libncurses5-dev libncursesw5-dev libreadline6-dev libdb5.3-dev libgdbm-dev libsqlite3-dev libssl-dev libbz2-dev liblzma-dev zlib1g-dev libffi-dev
+sudo wget https://www.python.org/ftp/python/3.10.4/Python-3.10.4.tar.xz
+sudo tar -xvf Python-3.10.4.tar.xz
+cd Python-3.10.4/
+sudo ./configure --enable-optimizations
+sudo make -j 4
+sudo make altinstall
+cd /home/pi
+
+sudo apt-get install python3-venv
+sudo apt-get install liblo-dev
+sudo apt-get install libglib2.0-dev
+sudo apt install libasound2-dev
+sudo apt install libjack-jackd2-dev
+(sudo apt-get install jack)
+sudo apt-get install fluidsynth
+sudo apt-get install i2c-tools
+sudo apt-get install jackd
+
+
+
+sudo apt-get install pip
+pip install update
+pip install decorator
+pip install pyinotify
+pip install cython
+pip install wheel
+pip install pyliblo
+pip install RPi.GPIO
+pip install smbus
+
+#####################################
+#		mididings install		#
+#####################################
+
+cd /home/pi
+sudo wget https://boostorg.jfrog.io/artifactory/main/release/1.79.0/source/boost_1_79_0.tar.gz
+sudo tar -xvf boost_1_79_0.tar.gz
+cd boost_1_79_0/
+
+sudo ./bootstrap.sh --prefix=/usr --with-python=python3.10 --with-libraries=python --with-libraries=thread
+sudo ./b2 stage -j4 threading=multi link=shared
+sudo ./b2 install threading=multi link=shared
+cd /lib
+sudo ln -sf /lib/libboost_python310.so libboost_python.so
+
+
+sudo apt-get install git
+git clone https://github.com/stefets/mididings.git
+cd mididings/
+git status
+git checkout build-2021-python3
+
+python3.10 -m venv /home/pi/pythonVenv10     #create virtual environement of python 3.10
+source /home/pi/pythonVenv10/bin/activate
+
+python --version
+pip install decorator     #reinstall lib with Virtual environement active
+pip install pyinotify
+pip install cython
+pip install wheel
+pip install RPi.GPIO
+pip install pyliblo
+pip install smbus
+
+### ajout du repertoire pi/.local/bin au path pour permettre a linux de trouver certaines commandes (lié a python)
+PATH=/home/pi/.local/bin:$PATH
+
+git status (#on branch origin/build-2021-python3)
+
+
+
+cd mididings
+/home/pi/pythonVenv10/bin/python3.10 setup.py build
+/home/pi/pythonVenv10/bin/python3.10 setup.py install
+
+
+
+
+#####################################
+#		lcd I2c install		#
+#####################################
+pip install smbus (deja fait au dessu)
+sudo raspi-config => interface => enable i2c
+sudo nano /etc/modules =>
+	i2c-bcm2708
+	i2c-dev
+
+
+###########################################
+#	recuperation du github midisynth	#						#
+###########################################
+
+cd /home/pi
+git clone https://github.com/ombbt/midisynth/
+
+###########################################
+#			carte son			#
+###########################################
+
+sudo nano /boot/config.txt  puis voir tuto carte son
+puis editer les fichier /home/pi/.asoundrc et /root/.asoundrc
+
+speaker-test (mono)
+speaker-test -c2 (stereo)
+
+a ce stade on peut deja tester le runpiano
+et un example
+ls -alh
+chmod +x ....
+
+./runpiano
+
+python Octobre2.py
+
+aconnect -l 
+
+modifier les connections dans le programme
+
+!!!!!!!!!! probleme: pour l'instant, mon fichier sf2 n'a pas chargé corectement.
+
+###########################################
+#			daemons			#
+###########################################
+
+cd /etc/systemd/system
+sudo ln -P /home/pi/midisynth/daemons/midisynth.service ./midisynth.service
+sudo ln -P /home/pi/midisynth/daemons/fluidsynth.service ./fluidsynth.service
+
+sudo systemctl enable midisynth.service
+sudo systemctl enable fluidsynth.service
+reboot
+
+systemctl status fluidsynth.service (display error message of fluidsynth)
+
+
+###########################################
+#		send sf2file.sf2 via scp 	#					#
+###########################################
+
+1 sur le rasperypi
+raspi-config #-enable ssh
+ssh localhost
+
+puis sur le terminal windows
+
+ssh pi@raspberrypi.local
+si le message d'ereur
+WARNING: POSSIBLE DNS SPOOFING DETECTED! 
+The ECDSA host key for raspberrypi.local has changed,
+
+suprimer le fichier C/users/alex/.ssh/known_host
+
+depuis un autre terminal
+scp FluidR3_GModif2 pi@raspberrypi.local:/home/pi
