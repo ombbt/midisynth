@@ -64,8 +64,28 @@ https://alsa.opensrc.org/MultipleCards (sujet Multiple cards)
 /var/lib/alsa/asound.state
 
 
+eaasai pour faire tourné jackd en deamon: ici on a un fichier créé par jackd j'ai lancé la ligne de commande qu('l donne mais c'est pas ca le probleme
+adjust 
+/etc/security/limits.d/audio.conf 
+if required (for realtime audio only !!)
 
 
+ooookaaayyy le jackd.service marche avec cette config:
+[Unit]
+Description=JACK
+After=sound.target
+
+[Service]
+LimitRTPRIO=infinity
+LimitMEMLOCK=infinity
+User=pi
+Environment="JACK_NO_AUDIO_RESERVATION=1"
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/dbus/system_bus_socket
+ExecStart=/usr/bin/jackd -r -d alsa -d hw:2
+
+
+[Install]
+WantedBy=multi-user.target
 
 
 
