@@ -1,0 +1,11 @@
+[Unit]
+Description=a2jmidid
+After=multidings.service
+
+[Service]
+User=pi
+ExecStartPre=/usr/bin/sleep 10
+ExecStart=/usr/bin/a2jmidid -ue -j default
+
+[Install]
+WantedBy=multi-user.target

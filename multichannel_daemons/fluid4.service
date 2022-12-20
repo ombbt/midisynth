@@ -1,0 +1,39 @@
+
+[Unit]
+Description=fluid4
+After=fluid3.service
+
+[Service]
+User=pi
+ExecStart=/usr/bin/fluidsynth -s -o "shell.port=9803" -o audio.jack.id=fluid4 -o synth.midi-bank-select=xg -a jack -m alsa_seq '/usr/share/sounds/sf2/FluidR3_GM.sf2'
+
+ExecStartPost=/usr/bin/sleep 25
+
+#audio connections
+ExecStartPost=/usr/bin/jack_connect fluid1midi:left system:playback_1
+ExecStartPost=/usr/bin/jack_connect fluid1midi:right system:playback_2
+ExecStartPost=/usr/bin/jack_connect fluid2midi:left system:playback_3
+ExecStartPost=/usr/bin/jack_connect fluid2midi:right system:playback_4
+ExecStartPost=/usr/bin/jack_connect fluid3midi:left system:playback_5
+ExecStartPost=/usr/bin/jack_connect fluid3midi:right system:playback_6
+ExecStartPost=/usr/bin/jack_connect fluid4midi:left system:playback_7
+ExecStartPost=/usr/bin/jack_connect fluid4midi:right system:playback_8
+
+ExecStartPost=/usr/bin/sleep 5
+#midi connections
+ExecStartPost=/usr/bin/jack_connect mididings:out_1 fluid1midi:midi_00
+ExecStartPost=/usr/bin/jack_connect mididings:out_2 fluid2midi:midi_00
+ExecStartPost=/usr/bin/jack_connect mididings:out_3 fluid3midi:midi_00
+ExecStartPost=/usr/bin/jack_connect mididings:out_4 fluid4midi:midi_00
+
+#ExecStartPost=/usr/bin/sleep 2
+#harware midi connections
+#ExecStartPost=/usr/bin/jack_connect system:midi_capture_1 mididings:in_1
+#ExecStartPost=/usr/bin/jack_connect system:midi_capture_3 mididings:in_2
+#ExecStartPost=/usr/bin/jack_connect mididings:out_5 system:midi_playback_1
+
+
+
+
+[Install]
+WantedBy=multi-user.target

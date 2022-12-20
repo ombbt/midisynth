@@ -1,0 +1,9 @@
+[Unit]
+Description=fluid3
+After=fluid2.service
+
+[Service]
+User=pi
+ExecStart=/usr/bin/fluidsynth -s -o "shell.port=9802" -o audio.jack.id=fluid3 -o synth.midi-bank-select=xg -a jack -m alsa_seq '/usr/share/sounds/sf2/FluidR3_GM.sf2'
+[Install]
+WantedBy=multi-user.target

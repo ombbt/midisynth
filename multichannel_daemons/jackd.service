@@ -1,0 +1,17 @@
+[Unit]
+Description=JACK
+After=multidings.service
+
+[Service]
+type=dbus
+BusName=org.freedesktop.DBus
+LimitRTPRIO=infinity
+LimitMEMLOCK=infinity
+User=pi
+Environment="JACK_NO_AUDIO_RESERVATION=1"
+ExecStartPre=/usr/bin/sleep 5
+ExecStart=/usr/bin/jackd -r -d alsa -d hw:2 -X raw
+
+
+[Install]
+WantedBy=multi-user.target

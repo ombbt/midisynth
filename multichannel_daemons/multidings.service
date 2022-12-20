@@ -1,0 +1,10 @@
+[Unit]
+Description=Midisynth Daemon
+After=sound.target
+
+[Service]
+User=pi
+ExecStart=/home/pi/pythonVenv10/bin/python /home/pi/midisynth/multichannel_examples/Decembre1.py
+
+[Install]
+WantedBy=multi-user.target
