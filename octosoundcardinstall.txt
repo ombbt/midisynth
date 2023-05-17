@@ -22,6 +22,8 @@ add this text to /etc/modprobe.d/audioinjector-octo.conf :
 softdep snd_soc_audioinjector_octo_soundcard pre: shd_soc_cs42xx8 snd_soc_cs42xx8_i2c
 (ca a l'air de marcher)
 
+puis modifier les fichiers .asoundrc et /etc/asound.conf
+
 
 
 
