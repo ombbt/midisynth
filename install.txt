@@ -27,7 +27,6 @@ sudo chmod 4755 /sbin/reboot
 sudo chmod 4755 /sbin/shutdown
 ( sudo chown -R pi:pi midisynth atribue un dossier et tout son contenu a pi)
 
-(pas besoin il me semble) sudo chmod 777 /usr/bin/wget
 
 #####################################
 #		pyhton 3.10 install	#
@@ -44,19 +43,19 @@ sudo make -j 4
 sudo make altinstall
 cd /home/pi
 
-sudo apt-get install python3-venv
-sudo apt-get install liblo-dev
-sudo apt-get install libglib2.0-dev
-sudo apt install libasound2-dev
-sudo apt install libjack-jackd2-dev
-sudo apt-get install jack
-sudo apt-get install fluidsynth
-sudo apt-get install i2c-tools
+sudo apt-get install python3-venv -y
+sudo apt-get install liblo-dev -y
+sudo apt-get install libglib2.0-dev -y
+sudo apt install libasound2-dev -y
+sudo apt install libjack-jackd2-dev -y
+sudo apt-get install jack -y
+sudo apt-get install fluidsynth -y
+sudo apt-get install i2c-tools -y
 
 
 
 
-sudo apt-get install pip
+sudo apt-get install pip -y
 pip install update
 pip install decorator
 pip install pyinotify
@@ -80,15 +79,15 @@ sudo ./b2 stage -j4 threading=multi link=shared
 sudo ./b2 install threading=multi link=shared
 cd /lib
 sudo ln -sf /lib/libboost_python310.so libboost_python.so
+cd /home/pi
 
-
-sudo apt-get install git
+sudo apt-get install git -y
 git clone https://github.com/stefets/mididings.git
 cd mididings/
 git status
 git checkout build-2021-python3
 
-python3.10 -m venv /home/pi/pythonVenv10     #create virtual environement of python 3.10
+python3.10 -m venv /home/pi/pythonVenv10
 source /home/pi/pythonVenv10/bin/activate
 
 python --version
