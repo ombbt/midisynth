@@ -1122,7 +1122,7 @@ def talkbox(self, togle):
 pads1 = [
 	#NotesPads HAHAHHAHAHAHHAHAHAHAAA
 #	CtrlFilter(51) >> CtrlValueFilter(127) >> Panic(bypass=True),
-	CtrlFilter(43) >> CtrlValueFilter(127) >> NoteOn(34, 60) >> out5,
+	CtrlFilter(43) >> CtrlValueFilter(127) >> NoteOn(34, 110) >> out5,
 	CtrlFilter(43) >> CtrlValueFilter(0) >> NoteOff(34, 0) >>out5,
 	CtrlFilter(50) >> CtrlValueFilter(127) >> [NoteOn(54, 60) >> out6, Process(light11)],
 	CtrlFilter(42) >> CtrlValueFilter(127) >> [NoteOn(90, 60) >> out7, Process(light12)],
@@ -1165,7 +1165,25 @@ padspolice = [
 ]
 
 
+pads2 = [
+        #NotesPads HAHAHHAHAHAHHAHAHAHAAA
+#       CtrlFilter(51) >> CtrlValueFilter(127) >> Panic(bypass=True),
+        CtrlFilter(43) >> CtrlValueFilter(127) >> NoteOn(34, 110) >> SceneSwitch(13),
+        CtrlFilter(50) >> CtrlValueFilter(127) >> [NoteOn(54, 60) >> out6, Process(light11)],
+        CtrlFilter(42) >> CtrlValueFilter(127) >> [NoteOn(90, 60) >> out7, Process(light12)],
 
+        #lightspad
+        CtrlFilter(44) >> CtrlValueFilter(127) >> Process(light1),
+        CtrlFilter(45) >> CtrlValueFilter(127) >> Process(light2),
+        CtrlFilter(46) >> CtrlValueFilter(127) >> Process(light3),
+        CtrlFilter(47) >> CtrlValueFilter(127) >> Process(light4),
+        CtrlFilter(48) >> CtrlValueFilter(127) >> Process(light5),
+        CtrlFilter(36) >> CtrlValueFilter(127) >> Process(light6),
+        CtrlFilter(37) >> CtrlValueFilter(127) >> Process(light7),
+        CtrlFilter(38) >> CtrlValueFilter(127) >> Process(light8),
+        CtrlFilter(39) >> CtrlValueFilter(127) >> Process(light9),
+        CtrlFilter(40) >> CtrlValueFilter(127) >> Process(light10),
+]
 
 talkboxdetect = [
 	Filter(NOTEON) >> Process(talkbox, True),
@@ -1196,33 +1214,33 @@ setupsc1 = [
 		Program(92) >> out5, #Pad 50
 		Program(91) >> out6, #Pad 43
 		Program(94) >> out7, #Pad 42
-		Program(128, 10, 2) >> out10, #drums program 2 du port 128 sur channel 10
+		Program(128, 10, 3) >> out10, #drums program 2 du port 128 sur channel 10
 ]
 #billiejean
 
 setupsc2 = [
 		Ctrl(3, 6) >> launchkeydaw16,
-		Program(39) >> out1, 
+		Program(40) >> out1, 
 		Program(6) >> out2, #out2 reservé a la talkbox
 		Program(70) >> out3, #out3 2em son du clavier
-		Program(12) >> out4, # 33:acoustic bass
+		Program(13) >> out4, # 33:acoustic bass
 		Program(92) >> out5, #Pad 50
 		Program(91) >> out6, #Pad 43
 		Program(94) >> out7, #Pad 42
-		Program(128, 10, 2) >> out10, #drums
+		Program(128, 10, 3) >> out10, #drums
 
 ]
 #automatic
 setupsc3 = [
 		Ctrl(3, 8) >> launchkeydaw16, #pad mode 3 => padmode 5 6 7 8 custom modes
-		Program(39) >> out1,
+		Program(40) >> out1,
 		Program(6) >> out2, #out2 reservé a la talkbox
 		Program(70) >> out3, #out3 2em son du clavier
-		Program(12) >> out4, # 33:acoustic bass
+		Program(8) >> out4, # 33:acoustic bass
 		Program(92) >> out5, #Pad 50
 		Program(91) >> out6, #Pad 43
 		Program(94) >> out7, #Pad 42
-		Program(128, 10, 2) >> out10, #drums
+		Program(128, 10, 3) >> out10, #drums
 
 ]
 
@@ -1230,14 +1248,14 @@ setupsc3 = [
 #if you feel it
 setupsc4 = [
 		Ctrl(3, 7) >> launchkeydaw16,
-		Program(39) >> out1,
+		Program(40) >> out1,
 		Program(6) >> out2, #out2 reservé a la talkbox
 		Program(70) >> out3, #out3 2em son du clavier
-		Program(12) >> out4, # 33:acoustic bass
+		Program(12) >> out4, #bass
 		Program(92) >> out5, #Pad 50
 		Program(91) >> out6, #Pad 43
 		Program(94) >> out7, #Pad 42
-		Program(128, 10, 2) >> out10, #drums
+		Program(128, 10, 3) >> out10, #drums
 
 ]
 
@@ -1245,14 +1263,14 @@ setupsc4 = [
 #Gorrillaz
 setupsc5 = [
 		Ctrl(3, 5) >> launchkeydaw16,			#custom modes : 5:RGB 6:VioletBillieJ 7:rasta 8:disco
-		Program(39) >> out1,
+		Program(40) >> out1,
 		Program(6) >> out2, #out2 reservé a la talkbox
 		Program(70) >> out3, #out3 2em son du clavier
-		Program(20) >> out4, # 33:acoustic bass
+		Program(12) >> out4, # 33:acoustic bass
 		Program(92) >> out5, #Pad 50
 		Program(91) >> out6, #Pad 43
 		Program(94) >> out7, #Pad 42
-		Program(128, 10, 2) >> out10, #drums
+		Program(128, 10, 3) >> out10, #drums
 
 ]
 
@@ -1261,14 +1279,14 @@ setupsc5 = [
 setupsc6 = [
 		Ctrl(3, 7) >> launchkeydaw16,
 		Program(1) >> out1,
-		Program(6) >> out2, #out2 reservé a la talkbox
-		Program(70) >> out3, #out3 2em son du clavier
+		Program(53) >> out2, #out2 reservé a la talkbox
+		Program(53) >> out3, #out3 2em son du clavier
 		Program(12) >> out4, # 33:acoustic bass
 		Program(92) >> out5, #Pad 50
 		Program(91) >> out6, #Pad 43
 		Program(94) >> out7, #Pad 42
 		Program(56) >> out8, #2em son du clavier basse
-		Program(128, 10, 2) >> out10, #drums
+		Program(128, 10, 3) >> out10, #drums
 
 ]
 
@@ -1276,14 +1294,14 @@ setupsc6 = [
 #Bad Girls
 setupsc7 = [
 		Ctrl(3, 8) >> launchkeydaw16,
-		Program(39) >> out1,
+		Program(40) >> out1,
 		Program(6) >> out2, #out2 reservé a la talkbox
-		Program(70) >> out3, #out3 2em son du clavier
-		Program(12) >> out4, # 33:acoustic bass
+		Program(52) >> out3, #out3 2em son du clavier
+		Program(12) >> out4, # bass
 		Program(92) >> out5, #Pad 50
 		Program(91) >> out6, #Pad 43
 		Program(94) >> out7, #Pad 42
-		Program(128, 10, 2) >> out10, #drums
+		Program(128, 10, 3) >> out10, #drums
 
 ]
 
@@ -1291,14 +1309,14 @@ setupsc7 = [
 #loose yourself to dance
 setupsc8 = [
 		Ctrl(3, 7) >> launchkeydaw16,
-		Program(39) >> out1,
+		Program(40) >> out1,
 		Program(6) >> out2, #out2 reservé a la talkbox
 		Program(70) >> out3, #out3 2em son du clavier
-		Program(12) >> out4, # 33:acoustic bass
+		Program(8) >> out4,
 		Program(92) >> out5, #Pad 50
 		Program(91) >> out6, #Pad 43
 		Program(94) >> out7, #Pad 42
-		Program(128, 10, 2) >> out10, #drums
+		Program(128, 10, 3) >> out10, #drums
 
 ]
 
@@ -1307,15 +1325,15 @@ setupsc8 = [
 #finaly
 setupsc9 = [
 		Ctrl(3, 6) >> launchkeydaw16,
-		Program(40) >> out1,
+		Program(4) >> out1,
 		Program(6) >> out2, #out2 reservé a la talkbox
-		Program(1) >> out3, #out3 2em son du clavier
-		Program(12) >> out4, # 33:acoustic bass
+		Program(40) >> out3, #out3 2em son du clavier
+		Program(15) >> out4, 
 		Program(92) >> out5, #Pad 50
 		Program(91) >> out6, #Pad 43
 		Program(94) >> out7, #Pad 42
-		Program(39) >> out8,
-		Program(128, 10, 2) >> out10, #drums
+		Program(53) >> out8,
+		Program(128, 10, 3) >> out10, #drums
 
 ]
 
@@ -1323,14 +1341,14 @@ setupsc9 = [
 #the police
 setupsc10 = [
 		Ctrl(3, 6) >> launchkeydaw16,
-		Program(39) >> out1,
+		Program(40) >> out1,
 		Program(6) >> out2, #out2 reservé a la talkbox
 		Program(70) >> out3, #out3 2em son du clavier
 		Program(12) >> out4, # 33:acoustic bass
 		Program(92) >> out5, #Pad 50
 		Program(91) >> out6, #Pad 43
 		Program(94) >> out7, #Pad 42
-		Program(128, 10, 2) >> out10, #drums
+		Program(128, 10, 3) >> out10, #drums
 
 ]
 
@@ -1338,28 +1356,28 @@ setupsc10 = [
 #solo clean
 setupsc11 = [
 		Ctrl(3, 7) >> launchkeydaw16,
-		Program(39) >> out1,
+		Program(40) >> out1,
 		Program(6) >> out2, #out2 reservé a la talkbox
 		Program(70) >> out3, #out3 2em son du clavier
 		Program(12) >> out4, # 33:acoustic bass
 		Program(92) >> out5, #Pad 50
 		Program(91) >> out6, #Pad 43
 		Program(94) >> out7, #Pad 42
-		Program(128, 10, 2) >> out10, #drums
+		Program(128, 10, 3) >> out10, #drums
 
 ]
 
 #solo satu
 setupsc12 = [
 		Ctrl(3, 5) >> launchkeydaw16,
-		Program(39) >> out1,
-		Program(6) >> out2, #out2 reservé a la talkbox
+		Program(40) >> out1,
+		Program(2) >> out2, #out2 reservé a la talkbox
 		Program(70) >> out3, #out3 2em son du clavier
 		Program(12) >> out4, # 33:acoustic bass
 		Program(92) >> out5, #Pad 50
 		Program(91) >> out6, #Pad 43
 		Program(94) >> out7, #Pad 42
-		Program(128, 10, 2) >> out10, #drums
+		Program(128, 10, 3) >> out10, #drums
 
 ]
 
@@ -1976,11 +1994,11 @@ scenerun1 =[
 
 	pads1,
 	ChannelSplit({
-		1: Transpose(5) >> out1,
+		1: Transpose(5) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> out1,
 	#	2: Transpose(5) >> out2,
 	#	3: Transpose(5) >> out3,
-		4: MakeMonophonic() >> Transpose(5) >> out4,
-		10: Pass() >> [out10, send_percu_i2c],
+		4: MakeMonophonic() >> Transpose(5) >> Velocity(fixed=127) >> out4,
+		10: Pass() >> Velocity(fixed=80) >> [out10, send_percu_i2c],
 
 })
 ]
@@ -1989,10 +2007,10 @@ scenerun1 =[
 scenerun2 =[
 	pads1,
 	ChannelSplit({
-		1: KeySplit('C3', Velocity(fixed=40) >> Transpose(9) >> [out2, talkboxdetect], Velocity(fixed=100) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(-15) >> out1 ),
+		1: KeySplit('C1', Velocity(fixed=40) >> Transpose(8) >> [out2, talkboxdetect], Velocity(fixed=95) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(8) >> out1 ),
 	#	2: Transpose(10) >> out2,
 	#	3: Transpose(10) >> out3,
-		4: MakeMonophonic() >> Transpose(9) >> out4,
+		4: MakeMonophonic() >> Transpose(8) >> Velocity(fixed=127) >> out4,
 		10: Pass() >> [out10, send_percu_i2c],
 })
 ]
@@ -2001,8 +2019,8 @@ scenerun2 =[
 scenerun3 =[
 	pads1,
 	ChannelSplit({
-		1: KeySplit('C2', Velocity(fixed=40) >> Transpose(19) >>[out2, talkboxdetect], Velocity(fixed=95) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(-5) >> out1),
-		4: MakeMonophonic() >> Transpose(7) >> out4,
+		1: Velocity(fixed=90) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(7) >> out1,
+		4: MakeMonophonic() >> Transpose(7) >> Velocity(fixed=90) >> out4,
 		10: Pass() >> [out10, send_percu_i2c],
 })
 ]
@@ -2012,10 +2030,10 @@ scenerun3 =[
 scenerun4 =[
 	pads1,
 	ChannelSplit({
-		1: Velocity(fixed=95) >> Transpose(1) >> out1 ,
+		1: Velocity(fixed=73) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(12) >> out1 ,
 	#	2: Transpose(10) >> out2,
 	#	3: Transpose(10) >> out3,
-		4: MakeMonophonic() >> Transpose(13) >> out4,
+		4: MakeMonophonic() >> Transpose(12) >> Velocity(fixed=127) >> out4,
 		10: Pass() >> [out10, send_percu_i2c],
 })
 ]
@@ -2025,10 +2043,10 @@ scenerun4 =[
 scenerun5 =[
 	pads1,
 	ChannelSplit({
-		1: Velocity(fixed=90) >> Transpose(8) >> out1 ,
+		1: Velocity(fixed=80) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(8) >> out1 ,
 	#	2: Transpose(10) >> out2,
 	#	3: Transpose(10) >> out3,
-		4: MakeMonophonic() >> Transpose(20) >> out4,
+		4: MakeMonophonic() >> Transpose(20) >> Velocity(fixed=127) >> out4,
 		10: Pass() >> [out10, send_percu_i2c],
 })
 ]
@@ -2037,26 +2055,39 @@ scenerun5 =[
 scenerun6 =[
 	pads1,
 	ChannelSplit({
-		1: KeySplit('C3', Velocity(fixed=40) >> Transpose(24) >> [out2, talkboxdetect],
-			KeySplit('C4', Velocity(fixed=40) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(0) >> out1,
-				Velocity(fixed=40) >> MakeMonophonic() >> Transpose(-24) >> PitchbendRange(8192, 8191, in_min=-16382, in_max=16382) >> out3)),
+		1: KeySplit('C3', Velocity(fixed=40) >> Transpose(24) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> [out2, talkboxdetect],
+			KeySplit('C4', Velocity(fixed=75) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(0) >> out1,
+				Velocity(fixed=120) >> MakeMonophonic() >> Transpose(0) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> out3)),
 	#	2: Transpose(10) >> out2,
 	#	3: Transpose(10) >> out3,
-		4: KeySplit('D0', MakeMonophonic() >> Transpose(26) >> Velocity(fixed=100) >> out8, MakeMonophonic() >> Transpose(0) >> out4),
+		4: KeySplit('D0', Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(26) >> Velocity(fixed=35) >> out8, MakeMonophonic() >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(0) >> Velocity(fixed=127) >> out4),
 		10: Pass() >> [out10, send_percu_i2c],
 })
 ]
 
 #Bad Girls
 scenerun7 =[
-	pads1,
+	pads2,
 	ChannelSplit({
-		1: KeySplit('C4', Velocity(fixed=105) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(10) >> out1,
-			Velocity(fixed=40) >> MakeMonophonic() >> Transpose(10) >> out3),
+		1: KeySplit('C2', Velocity(fixed=45) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(8) >> out3,
+			Velocity(fixed=90) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(8) >> out1),
 	#	2: Transpose(10) >> out2,
 	#	3: Transpose(10) >> out3,
-		4: MakeMonophonic() >> Transpose(10) >> out4,
+		4: MakeMonophonic() >> Transpose(8) >> Velocity(fixed=127) >> out4,
 		10: Pass() >> [out10, send_percu_i2c],
+})
+]
+
+#Bad Girls2
+scenerun71 =[
+        pads1,
+        ChannelSplit({
+                1: KeySplit('C2', Velocity(fixed=45) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(10) >> out3,
+                        Velocity(fixed=90) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(10) >> out1),
+        #       2: Transpose(10) >> out2,
+        #       3: Transpose(10) >> out3,
+                4: MakeMonophonic() >> Transpose(10) >> Velocity(fixed=127) >> out4,
+                10: Pass() >> [out10, send_percu_i2c],
 })
 ]
 
@@ -2067,7 +2098,7 @@ scenerun8 =[
 		1: KeySplit('C4', Velocity(fixed=40) >> Transpose(15) >> [out2, talkboxdetect], Velocity(fixed=40) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(15) >> out1 ),
 	#	2: Transpose(10) >> out2,
 	#	3: Transpose(10) >> out3,
-		4: MakeMonophonic() >> Transpose(15) >> out4,
+		4: MakeMonophonic() >> Transpose(15) >> Velocity(fixed=100) >> out4,
 		10: Pass() >> [out10, send_percu_i2c],
 })
 ]
@@ -2076,11 +2107,11 @@ scenerun8 =[
 scenerun9 =[
 	pads1,
 	ChannelSplit({
-		1: KeySplit('F2', Velocity(fixed=90) >> Transpose(0) >> out8,
-			KeySplit('F3', Velocity(fixed=105) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(0) >> out1,
-				 Velocity(fixed=70) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(-12) >> out3 )),
+		1: KeySplit('F2', Velocity(fixed=50) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(24) >> out8,
+			KeySplit('F3', Velocity(fixed=90) >> Transpose(12) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> out3,
+				 Velocity(fixed=65) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(0) >> out1 )),
 
-		4: MakeMonophonic() >> Transpose(0) >> out4,
+		4: MakeMonophonic() >> Transpose(12) >> Velocity(fixed=100) >> out4,
 		10: Pass() >> [out10, send_percu_i2c],
 })
 ]
@@ -2091,9 +2122,9 @@ scenerun10 =[
 	padspolice,
 	ChannelSplit({
 	#	1: KeySplit('C3', Velocity(fixed=40) >> Transpose(22) >> [out2, talkboxdetect], 
-		1: Velocity(fixed=70) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(10) >> out1,
-		4: MakeMonophonic() >> Transpose(10) >> out4,
-		10: Pass() >> [out10, send_percu_i2c],
+		1: Velocity(fixed=80) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(15) >> out1,
+		4: MakeMonophonic() >> Transpose(15) >> Velocity(fixed=127) >> out4,
+		10: Pass() >> Velocity(fixed=78) >> [out10, send_percu_i2c],
 })
 ]
 
@@ -2102,9 +2133,9 @@ scenerun11 =[
 	pads1,
 	ChannelSplit({
 	#	1: KeySplit('C3', Velocity(fixed=40) >> Transpose(5) >> [out2, talkboxdetect],
-		1: Velocity(fixed=70) >> Transpose(5) >> out1,
-		4: MakeMonophonic() >> Transpose(5) >> out4,
-		10: Pass() >> [out10, send_percu_i2c],
+		1: Velocity(fixed=80) >> Transpose(5) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> out1,
+		4: MakeMonophonic() >> Transpose(17) >> Velocity(fixed=120) >> out4,
+		10: Pass() >> Velocity(fixed=73) >> [out10, send_percu_i2c],
 })
 ]
 
@@ -2113,8 +2144,8 @@ scenerun12 =[
 	pads1,
 	ChannelSplit({
 	#	1: KeySplit('C3', Velocity(fixed=40) >> Transpose(22) >> [out2, talkboxdetect], 
-		1: Pass() >> Transpose(0) >> out1,
-		4: MakeMonophonic() >> Transpose(0) >> out4,
+		1: Pass() >> Transpose(0) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> out1,
+		4: MakeMonophonic() >> Transpose(12) >> Velocity(fixed=120) >> out4,
 		10: Pass() >> [out10, send_percu_i2c],
 })
 ]
@@ -2311,6 +2342,7 @@ scenes = {
 	10: Scene("can't stand loosin", scenerun10, init_patch=setupsc10),
 	11: Scene("soloclean", scenerun11, init_patch=setupsc11),
 	12: Scene("solosatu", scenerun12, init_patch=setupsc12),
+	13:  Scene("bad girls2", scenerun71, init_patch=setupsc7),
 
 	21: Scene("ORGAN", organrun, init_patch=organsetup0),
 	22: Scene("PIANO", pianorun, init_patch=pianosetup0),
