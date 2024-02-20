@@ -815,9 +815,10 @@ def readkeypad(self):
 						bus.write_byte(addr, 0x02)
 						#print("TRANSPOSE= ", TRANSPOSE, "  initran=", initran, " offset= ", offset )
 					elif mode == True:
+						switch_scene(13, subscene=None)
 						print('scene 13')
-						display.lcd_display_string("scene 13 vide    ", 1)
-						display.lcd_display_string("m:2  tr:  ", 2)
+						display.lcd_display_string("aint no stop ", 1)
+						display.lcd_display_string("m:2  chang  ", 2)
 
 						switch_scene(13, subscene=None)
 				elif keycode == 1:
@@ -866,8 +867,8 @@ def readkeypad(self):
 						display.lcd_display_string("m:1  tr:9", 2)
 						bus.write_byte(addr, 0x03)
 					elif mode == True:
-						print("scene 14")
-						display.lcd_display_string("scene 14 vide    ", 1)
+						switch_scene(14, subscene=None)
+						display.lcd_display_string(" diamond real    ", 1)
 						display.lcd_display_string("m:2  tr:", 2)
 
 						#switch_scene(, subscene=None)
@@ -1168,7 +1169,7 @@ padspolice = [
 pads2 = [
         #NotesPads HAHAHHAHAHAHHAHAHAHAAA
 #       CtrlFilter(51) >> CtrlValueFilter(127) >> Panic(bypass=True),
-        CtrlFilter(43) >> CtrlValueFilter(127) >> NoteOn(34, 110) >> SceneSwitch(13),
+        CtrlFilter(43) >> CtrlValueFilter(127) >> NoteOn(34, 110) >> SceneSwitch(20),
         CtrlFilter(50) >> CtrlValueFilter(127) >> [NoteOn(54, 60) >> out6, Process(light11)],
         CtrlFilter(42) >> CtrlValueFilter(127) >> [NoteOn(90, 60) >> out7, Process(light12)],
 
@@ -1184,6 +1185,24 @@ pads2 = [
         CtrlFilter(39) >> CtrlValueFilter(127) >> Process(light9),
         CtrlFilter(40) >> CtrlValueFilter(127) >> Process(light10),
 ]
+
+#ain't no stoping us now
+notechanges = [
+        KeyFilter('C0') >> Key('G#0'),
+        KeyFilter('C#0') >> Key('C0'),
+        KeyFilter('D0') >> Key('C0'),
+        KeyFilter('D#0') >> Key('D#0'),
+        KeyFilter('E0') >> Key('E0'),
+        KeyFilter('F0') >> Key('F0'),
+        KeyFilter('F#0') >> Key('D#0'),
+        KeyFilter('G0') >> Key('F0'),
+        KeyFilter('G#0') >> Key('G#0'),
+	KeyFilter('A0') >> Key('C1'),
+        KeyFilter('A#0') >> Key('A#0'),
+	KeyFilter('B0') >> Key('A#0'),
+	KeyFilter('C1') >> Key('G#1'),
+]
+
 
 talkboxdetect = [
 	Filter(NOTEON) >> Process(talkbox, True),
@@ -1378,6 +1397,35 @@ setupsc12 = [
 		Program(91) >> out6, #Pad 43
 		Program(94) >> out7, #Pad 42
 		Program(128, 10, 3) >> out10, #drums
+
+]
+
+
+#ain't no stopping us now
+setupsc13 = [
+                Ctrl(3, 8) >> launchkeydaw16,
+                Program(40) >> out1,
+                Program(6) >> out2, #out2 reservé a la talkbox
+                Program(52) >> out3, #out3 2em son du clavier
+                Program(12) >> out4, # bass
+                Program(92) >> out5, #Pad 50
+                Program(91) >> out6, #Pad 43
+                Program(94) >> out7, #Pad 42
+                Program(128, 10, 3) >> out10, #drums
+
+]
+
+#diamond real
+setupsc14 = [
+                Ctrl(3, 8) >> launchkeydaw16,
+                Program(2) >> out1,
+                Program(6) >> out2, #out2 reservé a la talkbox
+                Program(2) >> out3, #out3 2em son du clavier
+                Program(12) >> out4, # bass
+                Program(92) >> out5, #Pad 50
+                Program(91) >> out6, #Pad 43
+                Program(94) >> out7, #Pad 42
+                Program(128, 10, 3) >> out10, #drums
 
 ]
 
@@ -2151,6 +2199,32 @@ scenerun12 =[
 ]
 
 
+#ain't no stop
+scenerun13 =[
+        pads2,
+        ChannelSplit({
+                1: KeySplit('C2', Velocity(fixed=45) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(8) >> out3,
+                        Velocity(fixed=103) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(8) >> out1),
+        #       2: Transpose(10) >> out2,
+        #       3: Transpose(10) >> out3,
+                4: MakeMonophonic() >> Velocity(fixed=127) >> notechanges >> out4,
+                10: Pass() >> [out10, send_percu_i2c],
+})
+]
+
+
+#diamond real
+scenerun14 =[
+        pads1,
+        ChannelSplit({
+                1: Pass() >> Transpose(3) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> out1,
+        #       2: Transpose(10) >> out2,
+        #       3: Transpose(10) >> out3,
+                4: MakeMonophonic() >> Transpose(15) >> Velocity(fixed=100) >> out4,
+                10: Pass() >> [out10, send_percu_i2c],
+})
+]
+
 transposescene0 =[
         pads1,
         ChannelSplit({
@@ -2272,9 +2346,6 @@ transposescene11 =[
 })
 ]
 
-
-
-#ain't no stop
 talkboxrun =[
         pads1,
         ChannelSplit({
@@ -2286,7 +2357,7 @@ talkboxrun =[
 
 
 
-#ain't no stop
+
 organrun =[
         pads1,
         ChannelSplit({
@@ -2342,7 +2413,10 @@ scenes = {
 	10: Scene("can't stand loosin", scenerun10, init_patch=setupsc10),
 	11: Scene("soloclean", scenerun11, init_patch=setupsc11),
 	12: Scene("solosatu", scenerun12, init_patch=setupsc12),
-	13:  Scene("bad girls2", scenerun71, init_patch=setupsc7),
+	13: Scene("ain't no stop", scenerun13, init_patch=setupsc13),
+	14: Scene("diamond real", scenerun14, init_patch=setupsc14),
+
+	20:  Scene("bad girls2", scenerun71, init_patch=setupsc7),
 
 	21: Scene("ORGAN", organrun, init_patch=organsetup0),
 	22: Scene("PIANO", pianorun, init_patch=pianosetup0),
