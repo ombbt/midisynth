@@ -3,7 +3,7 @@ Description=FluidSynth Daemon
 After=sound.target
 
 [Service]
-ExecStart=/usr/bin/fluidsynth -is -o synth.midi-bank-select=xg -a alsa -r 44100 -g 1 '/home/pi/Janvier24sf.sf2'
+ExecStart=/usr/bin/fluidsynth -is -o synth.midi-bank-select=xg -a alsa -r 44100 -g 1 '/home/pi/mars25sf.sf2'
 
 [Install]
 WantedBy=multi-user.target

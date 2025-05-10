@@ -847,9 +847,11 @@ def readkeypad(self):
 						switch_scene(7, subscene=None)
 					elif mode == True:
 						print("scene 19 ")
-						display.lcd_display_string("scene 19  vide   ", 1)
+						display.lcd_display_string("   get down   ", 1)
 						display.lcd_display_string("m:2  tr:", 2)
-
+						bus.write_byte(addr, 0x09)
+						switch_scene(19, subscene=None)
+ #config light de loose yourself to dance
 						#switch_scene(19, subscene=None)
 				elif keycode == 3:
 					if mode == False:
@@ -1124,6 +1126,115 @@ def talkbox(self, togle):
 		bus.write_byte(addr, 0xA3)
 
 
+
+newpadsdf = [
+	#NotesPads HAHAHHAHAHAHHAHAHAHAAA process light 1 a 10
+#       CtrlFilter(51) >> CtrlValueFilter(127) >> Panic(bypass=True)
+
+	#lightspad
+	CtrlFilter(44) >> CtrlValueFilter(127) >> Process(light1),
+	CtrlFilter(45) >> CtrlValueFilter(127) >> Process(light2),
+	CtrlFilter(46) >> CtrlValueFilter(127) >> Process(light3),
+	CtrlFilter(47) >> CtrlValueFilter(127) >> Process(light4),
+	CtrlFilter(48) >> CtrlValueFilter(127) >> Process(light5),
+	CtrlFilter(49) >> CtrlValueFilter(127) >> Process(light6),
+	CtrlFilter(50) >> CtrlValueFilter(127) >> Process(light7),
+	CtrlFilter(51) >> CtrlValueFilter(127) >> Process(light8),
+
+
+
+	CtrlFilter(36) >> CtrlValueFilter(127) >> Process(light9),
+	CtrlFilter(37) >> CtrlValueFilter(127) >> Process(light5),
+	CtrlFilter(38) >> CtrlValueFilter(127) >> NoteOn(33, 60) >> out7,
+	CtrlFilter(39) >> CtrlValueFilter(127) >> NoteOn(24, 65) >> out8,
+	CtrlFilter(40) >> CtrlValueFilter(127) >> [NoteOn(30, 60) >> out3, Process(light11)],
+	CtrlFilter(41) >> CtrlValueFilter(127) >> [NoteOn(43, 60) >> out3, Process(light12)],
+	CtrlFilter(42) >> CtrlValueFilter(127) >> NoteOn(60, 80) >> out6,
+	CtrlFilter(43) >> CtrlValueFilter(127) >> NoteOn(27, 80) >> out5,
+#	CtrlFilter(43) >> CtrlValueFilter(0) >> NoteOff(34, 0) >>out5,
+]
+
+getdownpads = [
+        #NotesPads HAHAHHAHAHAHHAHAHAHAAA process light 1 a 10
+#       CtrlFilter(51) >> CtrlValueFilter(127) >> Panic(bypass=True)
+
+        #lightspad
+        CtrlFilter(44) >> CtrlValueFilter(127) >> Process(light1),
+        CtrlFilter(45) >> CtrlValueFilter(127) >> Process(light2),
+        CtrlFilter(46) >> CtrlValueFilter(127) >> Process(light3),
+        CtrlFilter(47) >> CtrlValueFilter(127) >> Process(light4),
+        CtrlFilter(48) >> CtrlValueFilter(127) >> Process(light5),
+        CtrlFilter(49) >> CtrlValueFilter(127) >> Process(light6),
+        CtrlFilter(50) >> CtrlValueFilter(127) >> Process(light7),
+        CtrlFilter(51) >> CtrlValueFilter(127) >> Process(light8),
+
+
+
+        CtrlFilter(36) >> CtrlValueFilter(127) >> Process(light9),
+        CtrlFilter(37) >> CtrlValueFilter(127) >> Process(light5),
+        CtrlFilter(38) >> CtrlValueFilter(127) >> NoteOn(33, 60) >> out7,
+        CtrlFilter(39) >> CtrlValueFilter(127) >> NoteOn(24, 60) >> out8,
+        CtrlFilter(40) >> CtrlValueFilter(127) >> [NoteOn(34, 60) >> out3, Process(light11)],
+        CtrlFilter(41) >> CtrlValueFilter(127) >> [NoteOn(48, 60) >> out3, Process(light12)],
+        CtrlFilter(42) >> CtrlValueFilter(127) >> NoteOn(62, 70) >> out6,
+        CtrlFilter(43) >> CtrlValueFilter(127) >> NoteOn(32, 80) >> out5,
+#       CtrlFilter(43) >> CtrlValueFilter(0) >> NoteOff(34, 0) >>out5,
+]
+
+ifyoufeelpads = [
+        #NotesPads HAHAHHAHAHAHHAHAHAHAAA process light 1 a 10
+#       CtrlFilter(51) >> CtrlValueFilter(127) >> Panic(bypass=True)
+
+        #lightspad
+        CtrlFilter(44) >> CtrlValueFilter(127) >> Process(light1),
+        CtrlFilter(45) >> CtrlValueFilter(127) >> Process(light2),
+        CtrlFilter(46) >> CtrlValueFilter(127) >> Process(light3),
+        CtrlFilter(47) >> CtrlValueFilter(127) >> Process(light4),
+        CtrlFilter(48) >> CtrlValueFilter(127) >> Process(light5),
+        CtrlFilter(49) >> CtrlValueFilter(127) >> Process(light6),
+        CtrlFilter(50) >> CtrlValueFilter(127) >> Process(light7),
+        CtrlFilter(51) >> CtrlValueFilter(127) >> Process(light8),
+
+
+
+        CtrlFilter(36) >> CtrlValueFilter(127) >> Process(light5),
+        CtrlFilter(37) >> CtrlValueFilter(127) >> Process(light6),
+        CtrlFilter(38) >> CtrlValueFilter(127) >> Process(light7),
+        CtrlFilter(39) >> CtrlValueFilter(127) >> Process(light8),
+        CtrlFilter(40) >> CtrlValueFilter(127) >> NoteOn(32, 115) >> out8,
+        CtrlFilter(41) >> CtrlValueFilter(127) >> NoteOn(36, 70) >> out5,
+        CtrlFilter(42) >> CtrlValueFilter(127) >> [NoteOn(56, 60) >> out6, Process(light11)],
+        CtrlFilter(43) >> CtrlValueFilter(127) >> [NoteOn(90, 60) >> out7, Process(light12)],
+#       CtrlFilter(43) >> CtrlValueFilter(0) >> NoteOff(34, 0) >>out5,
+]
+
+finalypads = [
+        #NotesPads HAHAHHAHAHAHHAHAHAHAAA process light 1 a 10
+#       CtrlFilter(51) >> CtrlValueFilter(127) >> Panic(bypass=True)
+
+        #lightspad
+        CtrlFilter(44) >> CtrlValueFilter(127) >> Process(light1),
+        CtrlFilter(45) >> CtrlValueFilter(127) >> Process(light2),
+        CtrlFilter(46) >> CtrlValueFilter(127) >> Process(light3),
+        CtrlFilter(47) >> CtrlValueFilter(127) >> Process(light4),
+        CtrlFilter(48) >> CtrlValueFilter(127) >> Process(light5),
+        CtrlFilter(49) >> CtrlValueFilter(127) >> Process(light6),
+        CtrlFilter(50) >> CtrlValueFilter(127) >> Process(light7),
+        CtrlFilter(51) >> CtrlValueFilter(127) >> Process(light8),
+
+
+
+        CtrlFilter(36) >> CtrlValueFilter(127) >> Process(light5),
+        CtrlFilter(37) >> CtrlValueFilter(127) >> Process(light6),
+        CtrlFilter(38) >> CtrlValueFilter(127) >> Process(light7),
+        CtrlFilter(39) >> CtrlValueFilter(127) >> Process(light8),
+        CtrlFilter(40) >> CtrlValueFilter(127) >> NoteOn(34, 115) >> out7,
+        CtrlFilter(41) >> CtrlValueFilter(127) >> NoteOn(32, 70) >> out5,
+        CtrlFilter(42) >> CtrlValueFilter(127) >> NoteOn(49, 80) >> out6,
+        CtrlFilter(43) >> CtrlValueFilter(127) >> NoteOn(38, 80) >> out7,
+#       CtrlFilter(43) >> CtrlValueFilter(0) >> NoteOff(34, 0) >>out5,
+]
+
 pads1 = [
 	#NotesPads HAHAHHAHAHAHHAHAHAHAAA
 #	CtrlFilter(51) >> CtrlValueFilter(127) >> Panic(bypass=True),
@@ -1192,6 +1303,7 @@ padsdreal = [
         CtrlFilter(39) >> CtrlValueFilter(127) >> Process(light9),
         CtrlFilter(40) >> CtrlValueFilter(127) >> Process(light10),
 ]
+
 
 padspolice = [
         #NotesPads HAHAHHAHAHAHHAHAHAHAAA
@@ -1333,11 +1445,12 @@ setupsc4 = [
 		Ctrl(3, 7) >> launchkeydaw16,
 		Program(40) >> out1,
 		Program(69) >> out2, #out2 reservé a la talkbox
-		Program(70) >> out3, #out3 2em son du clavier
+		Program(105) >> out3, #out3 2em son du clavier
 		Program(12) >> out4, #bass
-		Program(92) >> out5, #Pad 50
+		Program(102) >> out5, #Pad 50
 		Program(91) >> out6, #Pad 43
 		Program(94) >> out7, #Pad 42
+		Program(111) >> out8,
 		Program(128, 10, 3) >> out10, #drums
 
 ]
@@ -1362,8 +1475,8 @@ setupsc5 = [
 setupsc6 = [
 		Ctrl(3, 7) >> launchkeydaw16,
 		Program(1) >> out1,
-		Program(53) >> out2, #out2 reservé a la talkbox
-		Program(53) >> out3, #out3 2em son du clavier
+		Program(59) >> out2, #out2 reservé a la talkbox
+		Program(59) >> out3, #out3 2em son du clavier
 		Program(12) >> out4, # 33:acoustic bass
 		Program(92) >> out5, #Pad 50
 		Program(91) >> out6, #Pad 43
@@ -1394,11 +1507,12 @@ setupsc8 = [
 		Ctrl(3, 7) >> launchkeydaw16,
 		Program(40) >> out1,
 		Program(6) >> out2, #out2 reservé a la talkbox
-		Program(70) >> out3, #out3 2em son du clavier
-		Program(8) >> out4,
+		Program(103) >> out3, #pad
+		Program(8) >> out4, #bass
 		Program(112) >> out5, #Pad 50
-		Program(107) >> out6, #Pad 43
-		Program(102) >> out7, #Pad 42
+		Program(90) >> out6, #Pad 43
+		Program(99) >> out7, #Pad 42
+		Program(105) >> out8, #Pad 42
 		Program(128, 10, 3) >> out10, #drums
 
 ]
@@ -1413,9 +1527,9 @@ setupsc9 = [
 		Program(40) >> out3, #out3 2em son du clavier
 		Program(12) >> out4,
 		Program(106) >> out5, #Pad 50
-		Program(107) >> out6, #Pad 43
-		Program(111) >> out7, #Pad 42
-		Program(53) >> out8,
+		Program(110) >> out6, #Pad 43
+		Program(53) >> out8, #Pad 42
+		Program(99) >> out7,
 		Program(128, 10, 3) >> out10, #drums
 
 ]
@@ -1526,7 +1640,20 @@ talkboxsetup = [
 
 ]
 
+#Get down
+setupsc19 = [
+		Ctrl(3, 8) >> launchkeydaw16,
+		Program(2) >> out1,
+		Program(66) >> out2, #out2 reservé a la talkbox
+		Program(103) >> out3, #out3 2em son du clavier
+		Program(12) >> out4, # bass
+		Program(111) >> out5, #Pad 50
+		Program(90) >> out6, #Pad 43
+		Program(110) >> out7, #Pad 42
+		Program(105) >> out8, #pad
+		Program(128, 10, 3) >> out10, #drums
 
+]
 ##############################################################################
 ##############################################################################
 
@@ -2138,7 +2265,7 @@ scenerun1 =[
 	#	2: Transpose(5) >> out2,
 	#	3: Transpose(5) >> out3,
 		4: MakeMonophonic() >> Transpose(5) >> Velocity(fixed=127) >> out4,
-		10: Pass() >> Velocity(fixed=80) >> [out10, send_percu_i2c],
+		10: Pass() >> KeyFilter(36) >> Velocity(fixed=80) >> [out10, send_percu_i2c],
 
 })
 ]
@@ -2147,7 +2274,7 @@ scenerun1 =[
 scenerun2 =[
 	pads1,
 	ChannelSplit({
-		1: KeySplit('C1', Velocity(fixed=40) >> Transpose(8) >> [out2, talkboxdetect], Velocity(fixed=102) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(8) >> [out1, talkboxdetect] ),
+		1: KeySplit('C1', Velocity(fixed=40) >> Transpose(8) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> [out2, talkboxdetect], Velocity(fixed=102) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(8) >> [out1, talkboxdetect] ),
 	#	2: Transpose(10) >> out2,
 	#	3: Transpose(10) >> out3,
 		4: MakeMonophonic() >> Transpose(8) >> Velocity(fixed=127) >> out4,
@@ -2168,7 +2295,7 @@ scenerun3 =[
 
 # if you feel it
 scenerun4 =[
-	pads1,
+	ifyoufeelpads,
 	ChannelSplit({
 		1: KeySplit('C2', Velocity(fixed=90) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(-27) >> out2, Velocity(fixed=100) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(8) >> [out1, talkboxdetect] ),
 	#	2: Transpose(10) >> out2,
@@ -2195,7 +2322,7 @@ scenerun5 =[
 scenerun6 =[
 	pads1,
 	ChannelSplit({
-		1: KeySplit('C3', Velocity(fixed=40) >> Transpose(24) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> [out2, talkboxdetect],
+		1: KeySplit('C3', Velocity(fixed=63) >> Transpose(24) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> [out2, talkboxdetect],
 			KeySplit('C4', Velocity(fixed=75) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(0) >> out1,
 				Velocity(fixed=120) >> MakeMonophonic() >> Transpose(0) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> out3)),
 	#	2: Transpose(10) >> out2,
@@ -2233,9 +2360,9 @@ scenerun71 =[
 
 #loose yourself to dance
 scenerun8 =[
-	padsdf,
+	newpadsdf,
 	ChannelSplit({
-		1: KeySplit('C4', Velocity(fixed=40) >> Transpose(15) >> [out2, talkboxdetect], Velocity(fixed=40) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(15) >> out1 ),
+		1: KeySplit('C4', Velocity(fixed=40) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(15) >> [out2, talkboxdetect], Velocity(fixed=40) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(15) >> out1 ),
 	#	2: Transpose(10) >> out2,
 	#	3: Transpose(10) >> out3,
 		4: MakeMonophonic() >> Transpose(15) >> Velocity(fixed=100) >> out4,
@@ -2245,7 +2372,7 @@ scenerun8 =[
 
 #finaly
 scenerun9 =[
-	padsdf,
+	finalypads,
 	ChannelSplit({
 		1: KeySplit('F2', Velocity(fixed=50) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(18) >> out8,
 			KeySplit('F3', Velocity(fixed=102) >> Transpose(6) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> out3,
@@ -2334,14 +2461,26 @@ scenerun15 =[
 scenerun16 =[
         padsdreal,
         ChannelSplit({
-                1: KeySplit('C2', Velocity(fixed=45) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(14) >> out2,
-                        Velocity(fixed=103) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(-24) >> [out1, talkboxdetect]),
+                1: KeySplit('C2', Velocity(curve=2) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(14) >> out2,
+                        Velocity(curve=2) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(-24) >> [out1, talkboxdetect]),
         #       2: Transpose(10) >> out2,
         #       3: Transpose(10) >> out3,
                 4: MakeMonophonic() >> rednotechanges >> Velocity(fixed=127) >> out4,
                 10: Pass() >> KeyFilter(36) >> [out10, send_percu_i2c],
 })
 ]
+
+#Get down
+scenerun19 =[
+	getdownpads,
+	ChannelSplit({
+		1: KeySplit('C4', Velocity(curve=2) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(-7) >> out1,
+			Velocity(fixed=43) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(-7) >> [out2, talkboxdetect]),
+		4: MakeMonophonic() >> Transpose(5) >> Velocity(fixed=127) >> out4,
+		10: Pass() >> KeyFilter(36) >> [out10, send_percu_i2c],
+})
+]
+
 
 transposescene0 =[
         pads1,
@@ -2358,7 +2497,7 @@ transposescene1 =[
         pads1,
         ChannelSplit({
         #       1: KeySplit('C3', Velocity(fixed=40) >> Transpose(22) >> [out2, talkboxdetect],
-                1: Pass() >> Transpose(1) >> out1,
+                1: Pass() >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(1) >> out1,
                 4: MakeMonophonic() >> Transpose(1) >> out4,
                 10: Pass() >> out10,
 })
@@ -2368,7 +2507,7 @@ transposescene2 =[
         pads1,
         ChannelSplit({
         #       1: KeySplit('C3', Velocity(fixed=40) >> Transpose(22) >> [out2, talkboxdetect],
-                1: Pass() >> Transpose(2) >> out1,
+                1: Pass() >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(2) >> out1,
                 4: MakeMonophonic() >> Transpose(2) >> out4,
                 10: Pass() >> out10,
 })
@@ -2378,7 +2517,7 @@ transposescene3 =[
         pads1,
         ChannelSplit({
         #       1: KeySplit('C3', Velocity(fixed=40) >> Transpose(22) >> [out2, talkboxdetect],
-                1: Pass() >> Transpose(3) >> out1,
+                1: Pass() >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(3) >> out1,
                 4: MakeMonophonic() >> Transpose(3) >> out4,
                 10: Pass() >> out10,
 })
@@ -2388,7 +2527,7 @@ transposescene4 =[
         pads1,
         ChannelSplit({
         #       1: KeySplit('C3', Velocity(fixed=40) >> Transpose(22) >> [out2, talkboxdetect],
-                1: Pass() >> Transpose(4) >> out1,
+                1: Pass() >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(4) >> out1,
                 4: MakeMonophonic() >> Transpose(4) >> out4,
                 10: Pass() >> out10,
 })
@@ -2398,7 +2537,7 @@ transposescene5 =[
         pads1,
         ChannelSplit({
         #       1: KeySplit('C3', Velocity(fixed=40) >> Transpose(22) >> [out2, talkboxdetect],
-                1: Pass() >> Transpose(5) >> out1,
+                1: Pass() >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(5) >> out1,
                 4: MakeMonophonic() >> Transpose(5) >> out4,
                 10: Pass() >> out10,
 })
@@ -2408,7 +2547,7 @@ transposescene6 =[
         pads1,
         ChannelSplit({
         #       1: KeySplit('C3', Velocity(fixed=40) >> Transpose(22) >> [out2, talkboxdetect],
-                1: Pass() >> Transpose(6) >> out1,
+                1: Pass() >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(6) >> out1,
                 4: MakeMonophonic() >> Transpose(6) >> out4,
                 10: Pass() >> out10,
 })
@@ -2418,7 +2557,7 @@ transposescene7 =[
         pads1,
         ChannelSplit({
         #       1: KeySplit('C3', Velocity(fixed=40) >> Transpose(22) >> [out2, talkboxdetect],
-                1: Pass() >> Transpose(7) >> out1,
+                1: Pass() >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(7) >> out1,
                 4: MakeMonophonic() >> Transpose(7) >> out4,
                 10: Pass() >> out10,
 })
@@ -2428,7 +2567,7 @@ transposescene8 =[
         pads1,
         ChannelSplit({
         #       1: KeySplit('C3', Velocity(fixed=40) >> Transpose(22) >> [out2, talkboxdetect],
-                1: Pass() >> Transpose(8) >> out1,
+                1: Pass() >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(8) >> out1,
                 4: MakeMonophonic() >> Transpose(8) >> out4,
                 10: Pass() >> out10,
 })
@@ -2438,7 +2577,7 @@ transposescene9 =[
         pads1,
         ChannelSplit({
         #       1: KeySplit('C3', Velocity(fixed=40) >> Transpose(22) >> [out2, talkboxdetect],
-                1: Pass() >> Transpose(9) >> out1,
+                1: Pass() >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(9) >> out1,
                 4: MakeMonophonic() >> Transpose(9) >> out4,
                 10: Pass() >> out10,
 })
@@ -2448,7 +2587,7 @@ transposescene10 =[
         pads1,
         ChannelSplit({
         #       1: KeySplit('C3', Velocity(fixed=40) >> Transpose(22) >> [out2, talkboxdetect],
-                1: Pass() >> Transpose(10) >> out1,
+                1: Pass() >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(10) >> out1,
                 4: MakeMonophonic() >> Transpose(10) >> out4,
                 10: Pass() >> out10,
 })
@@ -2458,7 +2597,7 @@ transposescene11 =[
         pads1,
         ChannelSplit({
         #       1: KeySplit('C3', Velocity(fixed=40) >> Transpose(22) >> [out2, talkboxdetect],
-                1: Pass() >> Transpose(11) >> out1,
+                1: Pass() >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(11) >> out1,
                 4: MakeMonophonic() >> Transpose(11) >> out4,
                 10: Pass() >> out10,
 })
@@ -2467,7 +2606,7 @@ transposescene11 =[
 talkboxrun =[
         pads1,
         ChannelSplit({
-                1: Velocity(fixed=40) >> Transpose(24) >> [out2, talkboxdetect],
+                1: Velocity(fixed=40) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(24) >> [out2, talkboxdetect],
                 4: MakeMonophonic() >> Transpose(0) >> out4,
                 10: Pass() >> out10,
 })
@@ -2479,7 +2618,7 @@ talkboxrun =[
 organrun =[
         pads1,
         ChannelSplit({
-                1: Velocity(fixed=90) >> out1,
+                1: Velocity(fixed=90) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> out1,
                 4: MakeMonophonic() >> Transpose(0) >> out4,
                 10: Pass() >> out10,
 })
@@ -2489,7 +2628,7 @@ organrun =[
 pianorun =[
         pads1,
         ChannelSplit({
-                1: Velocity(gamma=2) >> out1,
+                1: Velocity(gamma=2) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> out1,
                 4: MakeMonophonic() >> Transpose(0) >> out4,
                 10: Pass() >> out10,
 })
@@ -2500,7 +2639,7 @@ pianorun =[
 synthrun =[
         pads1,
         ChannelSplit({
-                1: Velocity(gamma=2) >> out1,
+                1: Velocity(gamma=2) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> out1,
                 4: MakeMonophonic() >> Transpose(0) >> out4,
                 10: Pass() >> out10,
 })
@@ -2509,7 +2648,7 @@ synthrun =[
 bassmoderun =[
         pads1,
         ChannelSplit({
-                1: Velocity(fixed=90) >> MakeMonophonic() >> out1,
+                1: Velocity(fixed=90) >> MakeMonophonic() >> Filter(~PITCHBEND) >> Filter(~CTRL) >> out1,
                 4: MakeMonophonic() >> Transpose(0) >> out4,
                 10: Pass() >> out10,
 })
@@ -2535,6 +2674,7 @@ scenes = {
 	14: Scene("diamond real", scenerun14, init_patch=setupsc14),
 	15: Scene("teckno", scenerun15, init_patch=setupsc15),
 	16: Scene("red hot", scenerun16, init_patch=setupsc16),
+	19: Scene("get down", scenerun19, init_patch=setupsc19),
 	20:  Scene("bad girls2", scenerun71, init_patch=setupsc7),
 
 	21: Scene("ORGAN", organrun, init_patch=organsetup0),
