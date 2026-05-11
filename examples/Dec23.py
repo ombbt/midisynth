@@ -1117,9 +1117,12 @@ def talkbox(self, togle):
 	if togle == True:
 		print("talkboxlight ON")
 		print("talkboxMic Activate")
+		bus.write_byte(addr, 0xA2)
 	elif togle == False:
 		print("talkboxlight OFF")
 		print("talkboxMic Unactivate")
+		bus.write_byte(addr, 0xA3)
+
 
 pads1 = [
 	#NotesPads HAHAHHAHAHAHHAHAHAHAAA
@@ -1268,6 +1271,7 @@ talkboxdetect = [
 	Filter(NOTEON) >> Process(talkbox, True),
 	Filter(NOTEOFF) >> Process(talkbox, False),
 ]
+
 
 #############################################################################################################
 ############################################   SETUPS   #####################################################
@@ -2143,11 +2147,11 @@ scenerun1 =[
 scenerun2 =[
 	pads1,
 	ChannelSplit({
-		1: KeySplit('C1', Velocity(fixed=40) >> Transpose(8) >> [out2, talkboxdetect], Velocity(fixed=102) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(8) >> out1 ),
+		1: KeySplit('C1', Velocity(fixed=40) >> Transpose(8) >> [out2, talkboxdetect], Velocity(fixed=102) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(8) >> [out1, talkboxdetect] ),
 	#	2: Transpose(10) >> out2,
 	#	3: Transpose(10) >> out3,
 		4: MakeMonophonic() >> Transpose(8) >> Velocity(fixed=127) >> out4,
-		10: Pass() >> [out10, send_percu_i2c],
+		10: Pass() >> KeyFilter(36) >> [out10, send_percu_i2c],
 })
 ]
 
@@ -2155,9 +2159,9 @@ scenerun2 =[
 scenerun3 =[
 	pads1,
 	ChannelSplit({
-		1: Velocity(fixed=102) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(5) >> out1,
+		1: Velocity(fixed=102) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(5) >> [out1, talkboxdetect],
 		4: MakeMonophonic() >> Transpose(5) >> Velocity(fixed=90) >> out4,
-		10: Pass() >> [out10, send_percu_i2c],
+		10: Pass() >> KeyFilter(36) >> [out10, send_percu_i2c],
 })
 ]
 
@@ -2166,11 +2170,11 @@ scenerun3 =[
 scenerun4 =[
 	pads1,
 	ChannelSplit({
-		1: KeySplit('C2', Velocity(fixed=87) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(-26) >> out2, Velocity(fixed=100) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(10) >> out1 ),
+		1: KeySplit('C2', Velocity(fixed=90) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(-27) >> out2, Velocity(fixed=100) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(8) >> [out1, talkboxdetect] ),
 	#	2: Transpose(10) >> out2,
 	#	3: Transpose(10) >> out3,
-		4: MakeMonophonic() >> Transpose(10) >> Velocity(fixed=127) >> out4,
-		10: Pass() >> [out10, send_percu_i2c],
+		4: MakeMonophonic() >> Transpose(8) >> Velocity(fixed=127) >> out4,
+		10: Pass() >> KeyFilter(36) >> [out10, send_percu_i2c],
 })
 ]
 
@@ -2197,7 +2201,7 @@ scenerun6 =[
 	#	2: Transpose(10) >> out2,
 	#	3: Transpose(10) >> out3,
 		4: KeySplit('D0', Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(26) >> Velocity(fixed=35) >> out8, MakeMonophonic() >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(0) >> Velocity(fixed=127) >> out4),
-		10: Pass() >> [out10, send_percu_i2c],
+		10: Pass() >> KeyFilter(36) >> [out10, send_percu_i2c],
 })
 ]
 
@@ -2205,12 +2209,12 @@ scenerun6 =[
 scenerun7 =[
 	pads2,
 	ChannelSplit({
-		1: KeySplit('C2', Velocity(fixed=45) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(4) >> out3,
-			Velocity(fixed=103) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(4) >> out1),
+		1: KeySplit('C2', Velocity(fixed=45) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(3) >> out3,
+			Velocity(fixed=103) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(3) >> [out1, talkboxdetect]),
 	#	2: Transpose(10) >> out2,
 	#	3: Transpose(10) >> out3,
-		4: MakeMonophonic() >> Transpose(4) >> Velocity(fixed=127) >> out4,
-		10: Pass() >> [out10, send_percu_i2c],
+		4: MakeMonophonic() >> Transpose(3) >> Velocity(fixed=127) >> out4,
+		10: Pass() >> KeyFilter(36) >> [out10, send_percu_i2c],
 })
 ]
 
@@ -2218,12 +2222,12 @@ scenerun7 =[
 scenerun71 =[
         pads1,
         ChannelSplit({
-                1: KeySplit('C2', Velocity(fixed=45) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(6) >> out3,
-                        Velocity(fixed=103) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(6) >> out1),
+                1: KeySplit('C2', Velocity(fixed=45) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(5) >> out3,
+                        Velocity(fixed=103) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(5) >> [out1, talkboxdetect]),
         #       2: Transpose(10) >> out2,
         #       3: Transpose(10) >> out3,
-                4: MakeMonophonic() >> Transpose(6) >> Velocity(fixed=127) >> out4,
-                10: Pass() >> [out10, send_percu_i2c],
+                4: MakeMonophonic() >> Transpose(5) >> Velocity(fixed=127) >> out4,
+                10: Pass() >> KeyFilter(36) >> [out10, send_percu_i2c],
 })
 ]
 
@@ -2235,7 +2239,7 @@ scenerun8 =[
 	#	2: Transpose(10) >> out2,
 	#	3: Transpose(10) >> out3,
 		4: MakeMonophonic() >> Transpose(15) >> Velocity(fixed=100) >> out4,
-		10: Pass() >> [out10, send_percu_i2c],
+		10: Pass() >> KeyFilter(36) >> [out10, send_percu_i2c],
 })
 ]
 
@@ -2243,12 +2247,12 @@ scenerun8 =[
 scenerun9 =[
 	padsdf,
 	ChannelSplit({
-		1: KeySplit('F2', Velocity(fixed=50) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(22) >> out8,
-			KeySplit('F3', Velocity(fixed=102) >> Transpose(10) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> out3,
-				 Velocity(fixed=65) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(-2) >> out1 )),
+		1: KeySplit('F2', Velocity(fixed=50) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(18) >> out8,
+			KeySplit('F3', Velocity(fixed=102) >> Transpose(6) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> out3,
+				 Velocity(fixed=65) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(-6) >> out1 )),
 
-		4: MakeMonophonic() >> Transpose(10) >> Velocity(fixed=127) >> out4,
-		10: Pass() >> [out10, send_percu_i2c],
+		4: MakeMonophonic() >> Transpose(6) >> Velocity(fixed=127) >> out4,
+		10: Pass() >> KeyFilter(36) >> [out10, send_percu_i2c],
 })
 ]
 
@@ -2271,7 +2275,7 @@ scenerun11 =[
 	#	1: KeySplit('C3', Velocity(fixed=40) >> Transpose(5) >> [out2, talkboxdetect],
 		1: Velocity(fixed=80) >> Transpose(5) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> out1,
 		4: MakeMonophonic() >> Transpose(17) >> Velocity(fixed=120) >> out4,
-		10: Pass() >> Velocity(fixed=73) >> [out10, send_percu_i2c],
+		10: Pass() >> KeyFilter(36) >> Velocity(fixed=73) >> [out10, send_percu_i2c],
 })
 ]
 
@@ -2282,7 +2286,7 @@ scenerun12 =[
 	#	1: KeySplit('C3', Velocity(fixed=40) >> Transpose(22) >> [out2, talkboxdetect], 
 		1: Pass() >> Transpose(0) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> out1,
 		4: MakeMonophonic() >> Transpose(12) >> Velocity(fixed=120) >> out4,
-		10: Pass() >> [out10, send_percu_i2c],
+		10: Pass() >> KeyFilter(36) >> [out10, send_percu_i2c],
 })
 ]
 
@@ -2296,7 +2300,7 @@ scenerun13 =[
         #       2: Transpose(10) >> out2,
         #       3: Transpose(10) >> out3,
                 4: MakeMonophonic() >> Velocity(fixed=127) >> notechanges >> out4,
-                10: Pass() >> [out10, send_percu_i2c],
+                10: Pass() >> KeyFilter(36) >> [out10, send_percu_i2c],
 })
 ]
 
@@ -2309,7 +2313,7 @@ scenerun14 =[
         #       2: Transpose(10) >> out2,
         #       3: Transpose(10) >> out3,
                 4: MakeMonophonic() >> Transpose(17) >> Velocity(fixed=100) >> out4,
-                10: Pass() >> [out10, send_percu_i2c],
+                10: Pass() >> KeyFilter(36) >> [out10, send_percu_i2c],
 })
 ]
 
@@ -2322,7 +2326,7 @@ scenerun15 =[
         #       2: Transpose(10) >> out2,
         #       3: Transpose(10) >> out3,
                 4: MakeMonophonic() >> Transpose(0) >> Velocity(fixed=100) >> out4,
-                10: Pass() >> [out10, send_percu_i2c],
+                10: Pass() >> KeyFilter(36) >> [out10, send_percu_i2c],
 })
 ]
 
@@ -2330,12 +2334,12 @@ scenerun15 =[
 scenerun16 =[
         padsdreal,
         ChannelSplit({
-                1: KeySplit('C2', Velocity(fixed=45) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(8) >> out2,
-                        Velocity(fixed=103) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(-22) >> out1),
+                1: KeySplit('C2', Velocity(fixed=45) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(14) >> out2,
+                        Velocity(fixed=103) >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(-24) >> [out1, talkboxdetect]),
         #       2: Transpose(10) >> out2,
         #       3: Transpose(10) >> out3,
                 4: MakeMonophonic() >> rednotechanges >> Velocity(fixed=127) >> out4,
-                10: Pass() >> [out10, send_percu_i2c],
+                10: Pass() >> KeyFilter(36) >> [out10, send_percu_i2c],
 })
 ]
 
@@ -2343,7 +2347,7 @@ transposescene0 =[
         pads1,
         ChannelSplit({
         #       1: KeySplit('C3', Velocity(fixed=40) >> Transpose(22) >> [out2, talkboxdetect],
-                1: Pass() >> Transpose(0) >> out1,
+                1: Pass() >> Filter(~PITCHBEND) >> Filter(~CTRL) >> Transpose(0) >> out1,
                 4: MakeMonophonic() >> Transpose(0) >> out4,
                 10: Pass() >> out10,
 })
